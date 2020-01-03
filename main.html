@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="scripts/css/bootstrap.min.css">
+
+    <script src="scripts/js/jquery.min.js?ver1.1"></script>
+    <script src="scripts/js/popper.min.js?ver1.1"></script>
+    <script src="scripts/js/bootstrap.min.js?ver1.1"></script>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<style type="text/css">
+
+   /* The side navigation menu */
+.sidenav {
+  width: 250px; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 10s ease infinite;
+	-moz-animation: Gradient 10s ease infinite;
+	animation: Gradient 10s ease infinite;
+
+}
+
+/* The navigation menu links */
+.sidenav a, .sidenav div {
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+
+
+.sidenav a {
+  padding-left: 20px;
+}
+
+.card input {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+.card img {
+  width: 170px;
+  height: 170px;
+
+}
+
+.card {
+  text-align: center;
+  margin: 0 10px 0 10px;
+  width: 40%;
+  border-radius: 10px;
+  padding-top: 5px;
+  border: 2px lightgrey solid;
+  transition: 2s;
+}
+
+.card:hover {
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, white, white, #23D5AB);
+	background-size: 400% 400%;
+  -webkit-animation: Gradient2 1s  ease-in forwards;
+    -moz-animation: Gradient2 1s  ease-in forwards;
+    animation: Gradient2 1s  ease-in forwards;
+}
+
+
+.sidenav a:hover {
+  color: black;
+}
+
+
+
+
+.input-text {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid lightgrey;
+  width: 100%;
+  top:0;
+  transition-property: top; 
+	transition-duration: 0.2s;
+  position: relative;
+}
+
+.input-text:focus {
+  border-bottom: 1px solid grey;
+  top: 5px;
+  position: relative;
+}
+
+
+
+#app {
+  transition: padding-left .5s;
+  padding-left: 250px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+} 
+
+@-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-webkit-keyframes Gradient2 {
+	0% {
+		background-position: 0% 50%
+	}
+  50%{
+    color:white;
+  }
+	100% {
+		background-position: 100% 50%;
+    color:white;
+	}
+}
+
+@-moz-keyframes Gradient2 {
+	0% {
+		background-position: 0% 50%
+	}
+  50%{
+    color:white;
+  }
+	100% {
+		background-position: 100% 50%;
+    color:white;
+	}
+
+}
+
+@keyframes Gradient2 {
+	0% {
+		background-position: 0% 50%
+	}
+  50%{
+    color:white;
+  }
+	100% {
+		background-position: 100% 50%;
+    color:white;
+	}
+
+}
+
+
+.background-gradient {
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 10s ease infinite;
+	-moz-animation: Gradient 10s ease infinite;
+	animation: Gradient 10s ease infinite;
+}
+
+</style>
+
+
+
+<body >
+
+
+
+ <div id="mySidenav" class="sidenav vh-100">
+  <a class="d-flex flex-row-reverse"><span class="d-flex" href="javascript:void(0)" onclick="closeNav()" style="font-size: 30px; cursor: pointer; color: white;">&times;</span></a>
+      
+      <div class="d-flex flex-column justify-content-center">
+        <div class="d-flex flex-row justify-content-center">
+            <div style="width: 100px; height: 100px; border: solid lightgrey 1px; border-radius: 50px;background-color: white;">
+              <div  style="width: 100%; height: 100%;  border-radius: 50px;background-repeat: no-repeat; background-image: url('img/logo-main.png'); background-position: center;">
+              </div>
+            </div>
+
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <h5>Pius Wiatmojo</h5>
+        </div>
+
+      </div>
+
+
+  <hr>
+  <a href="#" class="row"><i class="fa fa-database col-1"></i><span class="col-11">Databases</span></a>
+  <hr>
+  <a href="#" class="row"><i class="fa fa-plus col-1"></i><span class="col-11">Add Database</span></a>
+  <hr>
+  <a href="#" class="row"><i class="fa fa-signal col-1"></i><span class="col-11">Monitoring Page</span></a>
+  <hr>
+  <a href="#" class="row"><i class="fa fa-sign-out-alt col-1"></i><span class="col-11">Sign-out</span></a>
+</div>
+
+<!-- Use any element to open the sidenav -->
+<button type="button" class="btn btn-dark background-gradient m-3" onclick="openNav()" style="position: fixed; border: solid 1px lightgrey">
+    <div class="fas fa-tasks"></div>
+</button>
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="app" class="d-flex align-items-center py-4" style="min-height: 100vh; min-width: 100%;">
+    
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="min-width: 100%; min-height:100%;">
+        <div class="carousel-inner">
+          <form action="">
+          <div class="carousel-item active">
+              <div class="d-flex flex-column">
+                  <div class="d-flex justify-content-center">
+                      <h3>Choose Your DBMS</h3>
+                  </div>
+                  <hr style="width: 30%">
+                  <div class="d-flex flex-row justify-content-center pb-4">
+                      <div class="card">
+                          <img class="card-img-top mx-auto d-block" src="img/postgres.png" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">PostgreSQL</h5>
+                            <p class="card-text">A relational database management system (RDBMS) emphasizing extensibility and technical standards compliance</p>
+                            <hr style="width: 70%">
+                            <p>Available Version</p>
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                              <button  href="#carouselExampleControls" data-slide="next" type="button" class="btn btn-secondary">10</button>
+                              <button  href="#carouselExampleControls" data-slide="next" type="button" class="btn btn-secondary">11</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                            <img class="card-img-top mx-auto d-block" src="img/mongodb.png" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">MongoDB</h5>
+                              <p class="card-text">A NoSQL document-oriented database program, MongoDB uses JSON-like documents with schemata. </p>
+                              <hr style="width: 70%">
+                              <p>Available Version</p>
+                              <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button  href="#carouselExampleControls" data-slide="next" type="button" class="btn btn-secondary">3.4</button>
+                                <button  href="#carouselExampleControls" data-slide="next" type="button" class="btn btn-secondary">3.6</button>
+                              </div>
+                            </div>
+                            </div>
+                      </div>
+                  </div>
+
+
+
+              </div>
+
+
+          <div class="carousel-item">
+              <div class="col-10" style="border: 2px lightgrey solid;border-radius: 10px; margin:auto;padding:0">
+                      <div class="row" style="max-width: 100%; margin:0;">
+                          <div class="col-8 p-4" style="min-height: 100%;border-right: 2px solid lightgrey">
+                              <h5>DB Details</h5>
+                              <div class="form-group row">
+                                  <label for="colFormLabel" class="col-sm-3 col-form-label">Hostname</label>
+                                  <div class="col-sm-9">
+                                    <input class="input-text" type="text" id="colFormLabel">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="colFormLabel" class="col-sm-3 col-form-label">Database Name</label>
+                                    <div class="col-sm-9">
+                                      <input class="input-text" type="text" id="colFormLabel" >
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label for="colFormLabel" class="col-sm-3 col-form-label">Data Directory</label>
+                                      <div class="col-sm-9">
+                                        <input class="input-text" type="text"  id="colFormLabel" placeholder="Default in /db/{{ version }}/data">
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-3 col-form-label">Log Directory</label>
+                                        <div class="col-sm-9">
+                                          <input class="input-text" type="text"  id="colFormLabel" placeholder="Default in /archive_log/pg_wals">
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                          <label for="colFormLabel" class="col-sm-3 col-form-label">Archive Directory</label>
+                                          <div class="col-sm-9">
+                                            <input class="input-text" type="text"  id="colFormLabel" placeholder="Default in /pg_log/pglog/">
+                                          </div>
+                                        </div>
+                          </div>
+                          <div class="col-4 px-0">
+                                <div class="d-flex align-content-stretch flex-wrap" style="min-height: 100%;">
+                                  <div class="p-4" style="border-bottom: 2px solid  lightgrey;min-width: 100%;">
+                                      <h5>Superuser</h5>
+                                      <div class="form-group row">
+                                          <label for="colFormLabel" class="col-sm-4 col-form-label">Name</label>
+                                          <div class="col-sm-8">
+                                            <input class="input-text" type="text"  id="colFormLabel" >
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="colFormLabel" class="col-sm-4 col-form-label">Password</label>
+                                            <div class="col-sm-8">
+                                              <input class="input-text" type="password"  id="colFormLabel" >
+                                            </div>
+                                          </div>
+                                  </div>
+                                  <div class="p-4" style="min-width: 100%;">
+                                      <h5>DB Add-ons</h5>
+                                      <div style="text-align: left;">
+                                          <div class="form-check justify-content-center">
+                                              <input class="form-check-input" type="checkbox" value="" id="replicationCheck">
+                                              <label class="form-check-label" for="replicationCheck">
+                                                Streaming Replication
+                                              </label>
+                                            </div>
+      
+                                              <div class="form-check justify-content-center">
+                                                  <input class="form-check-input" type="checkbox" value="" id="pgBackRestCheck" disabled>
+                                                  <label class="form-check-label" for="pgBackRestCheck">
+                                                    pgBackRest
+                                                  </label>
+                                                </div>
+      
+                                                <div class="form-check justify-content-center">
+                                                  <input class="form-check-input" type="checkbox" value="" id="pgpoolCheck" disabled>
+                                                  <label class="form-check-label" for="pgpoolCheck">
+                                                    pgpool
+                                                  </label>
+                                                </div>
+                                      </div>
+      
+                                  </div>
+                                </div>
+                          </div>
+                      </div>
+    
+  
+    
+    
+                      <div class="row" style="border-top: 2px solid lightgrey;max-width: 100%; margin:0;">
+                              <div class="col-4 p-4" id="replication-form" style="display: none; min-height: 100%; border-right: 2px solid lightgrey" >
+                                  <h5>Replica Hostname</h5>
+                                  <div class="form-group row">
+                                      <label for="colFormLabel" class="col-sm-3 col-form-label">Standby Name</label>
+                                      <div class="col-sm-9">
+                                        <input class="input-text" type="text"  id="colFormLabel">
+                                      </div>
+                                    </div>
+                            </div>
+                           
+                            <div class="col-4  p-4" id="pgBackRest-form" style="display: none;min-height: 100%; border-right: 2px solid lightgrey;" >
+                                  <h5>Pgbackrest Repo</h5>
+                                  <div class="form-group row">
+                                      <label for="colFormLabel" class="col-sm-3 col-form-label">Path</label>
+                                      <div class="col-sm-9">
+                                        <input class="input-text" type="text"  id="colFormLabel">
+                                      </div>
+                                    </div>
+                            </div>
+      
+      
+                            <div class="col-4  p-4" id="pgpool-form" style="display: none;min-height: 100%;">
+    
+                                    <h5>Pgpool Hostname</h5>
+                                 
+                                      <div class="form-group row">
+                                          <label for="colFormLabel" class="col-sm-4 col-form-label">Master</label>
+                                          <div class="col-sm-8">
+                                            <input class="input-text" type="text"  id="colFormLabel" >
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="colFormLabel" class="col-sm-4 col-form-label">Slave</label>
+                                            <div class="col-sm-8">
+                                              <input class="input-text" type="text"  id="colFormLabel" >
+                                            </div>
+                                          </div>
+    
+                            </div>
+                          </div>
+    
+
+    
+
+    
+                      <div class="d-flex flex-row justify-content-center py-4" id="box-button">
+                          <div class="col-12 d-flex flex-row-reverse">
+                              <button class="btn btn-lg btn-dark background-gradient" style="border: none">Install</button>
+                          </div>
+                      </div>
+                </div>
+
+
+          </div>
+          
+
+        </form>
+        </div>
+      </div>
+</div>
+
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+$("#replicationCheck").click(function() {
+    if(this.checked) {
+      $("#pgpoolCheck").prop('disabled', false);
+      $("#pgBackRestCheck").prop('disabled', false);
+      $("#replication-form").slideToggle();
+      $("#box-button").css("border-top", "solid 2px lightgrey");
+    }
+    else{
+      $("#pgBackRest-form").slideUp();
+      $("#pgpool-form").slideUp();
+      $("#pgpoolCheck").prop('disabled', true);
+      $("#pgBackRestCheck").prop('disabled', true);
+      $("#pgpoolCheck").prop('checked', false);
+      $("#pgBackRestCheck").prop('checked', false);
+      $("#replication-form").slideToggle();
+      $("#box-button").css("border-top", "none");
+    }
+});
+
+$("#pgBackRestCheck").click(function() {
+  $("#pgBackRest-form").slideToggle();
+});
+
+$("#pgpoolCheck").click(function() {
+  $("#pgpool-form").slideToggle();
+});
+
+$('.carousel').carousel({
+  interval: 0
+})
+/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("app").style.paddingLeft = "250px";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("app").style.paddingLeft = "0";
+}
+</script>

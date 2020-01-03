@@ -1,0 +1,466 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Db;
+use File;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+
+
+class DbController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'auth.dba']);
+    }
+    public function index()
+    {
+        //
+
+        $dbs = Db::paginate(8);
+
+        return view('db.dbinstance', ['dbs' => $dbs]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $dbs = Db::all();
+        // foreach ($dbs as $db) {
+        //     // $db->requesteddisk =  json_encode($dbs->requesteddisk);
+        // }
+        // $arrayA[] = $dbs[0]->requesteddisk;
+        // return $arrayA;
+
+        return view('db.request', ['dbs' => $dbs]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function store(Request $request)
+    {
+        $db = new Db;
+
+        $subnames = explode("-", $request->serviceName);
+        foreach ($subnames as $subname) {
+            $db->servicename .= $subname . "_";
+        }
+
+        $requestedDisk = "";
+        for ($count = 0; $count < sizeof($request->requestedDiskName); $count++) {
+            $requestedDisk .= $request->requestedDiskName[$count] . ", " . $request->requestedDiskSize[$count] . ", ";
+        }
+        $requestedDisk = substr($requestedDisk, 0, strlen($requestedDisk) - 2);
+
+        $db->servicename = substr($db->servicename, 0, strlen($db->servicename) - 1);
+        $db->hostname = $request->serviceName . "xx-01.wallet.lokal";
+        $db->appusername = "";
+        $db->appuserpassword = "";
+        $db->engine = $request->requestType;
+        $db->requestedcpu = $request->requestCpu;
+        $db->requestedmemory = $request->requestMemory;
+        $db->requestedDisk = json_encode($requestedDisk);
+        $db->status = "requested";
+
+
+
+
+
+
+        // $message = "Dear DevOps Team,<br>Please Create VMs with the following Details:<br><br>
+        // <b>PostgresSQL DB Hostnames:<br>
+        // <ul>
+        //     <li>" . $request->serviceName . "db-01.wallet.lokal</li>
+        //     <li>" . $request->serviceName . "db-02.wallet.lokal</li>
+        // </ul>
+        // <br>Both with the following specs:<br>
+        // CPU: " . $request->requestCpu . " Cores<br>
+        // Memory: " . $request->requestMemory . " GB<br>
+
+        // disk partitions:<br><ul>";
+        // foreach ($request->requestedDisk as $requested) {
+
+
+        //     $message .= "<li>/" . $requested . "</li>";
+        // }
+
+        // $message .= "</ul>
+        // <br>PgBouncer Hostnames:<br>
+        // <ul>
+        //     <li>" . $request->serviceName . "pgbouncer-01.wallet.lokal</li>
+        //     <li>" . $request->serviceName . "pgbouncer-02.wallet.lokal</li>
+        // <ul><br>
+        // ";
+
+
+
+
+
+        // $connector = new \Sebbmyr\Teams\TeamsConnector("https://outlook.office.com/webhook/175d4297-dfbb-4714-85bf-4cf45474f268@f0d6e2fe-f005-4046-8dc1-16668be1de52/IncomingWebhook/84de120bd9df4a6a862feb3ec32846ae/1ccb9fb1-b840-495b-bd48-0f303bfcaafe");
+        // // create card
+        // $card  = new \Sebbmyr\Teams\Cards\SimpleCard(['title' => 'VM Request for a New Service', 'text' => $message]);
+        // // send card via connector
+        // $connector->send($card);
+
+
+
+        $db->save();
+        return redirect('/db')->with('success', 'DB Successfully Requested');
+
+
+        //     $this->validate($request, [
+        //         'dbname' => 'unique:dbs'
+        //     ]);
+
+
+
+
+        //     $db = new Db;
+        //     $db->dbname = $request->dbname;
+        //     if($request->version == 10){
+        //         $db->dbengine = "PostgreSQL-10";
+        //     }
+        //     else if($request->version == 11){
+        //         $db->dbengine = "PostgreSQL-11";
+        //     }
+        //     else if($request->version == 3.4){
+        //         $db->dbengine = "MongoDB-3.4";
+        //     }
+        //     else {
+        //         $db->dbengine = "MongoDB-3.6";
+        //     }
+        //     $db->hostname = $request->hostname;
+        //     $db->superusername = $request->superusername;
+        //     $db->superuserpassword = $request->superuserpassword;
+
+        //     $db->replica = "-";
+        //     $db->replicausername = "-";
+        //     $db->replicauserpassword = "-";
+        //     $db->pgbackrest = "-";
+
+        //     $db->pgpoolmaster = "-";
+        //     $db->pgpoolslave = "-";
+
+        //     Storage::put('defaults.yml', "");
+        //     Storage::put('vars.yml', "");
+        //     Storage::put('hosts', "");
+
+        //     Storage::append('hosts', '[all_postgresql]' );
+        //     Storage::append('hosts', $request->hostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+
+        // $pembagi = 57;
+
+        //     if($request->replication == "yes"){
+        //         $this->validate($request, [
+        //             'standbyhostname' => 'required|unique:dbs,hostname',
+        //             'replicationusername' => 'required',
+        //             'replicationuserpassword' => 'required'
+        // ]);
+
+        //     $pembagi = 126;
+
+        //         //buat all_postgresql
+        //         Storage::append('hosts', $request->standbyhostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+
+        //         //buat slave_postgresql
+        //         Storage::prepend('hosts', '');
+        //         Storage::prepend('hosts', $request->standbyhostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', '[slave_replication]');
+
+        //         //buat master_postgresql
+        //         Storage::prepend('hosts', '');
+        //         Storage::prepend('hosts', $request->hostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', '[master_replication]');
+
+
+        //         Storage::prepend('vars.yml', 'replica_user_password: "' . $request->replicationuserpassword . '"' );
+        //         Storage::append('defaults.yml', 'replica_user_name: "' . $request->replicationusername .'"');
+
+
+
+        //         $db->replica = $request->standbyhostname;
+        //         $db->replicausername = $request->replicationusername;
+        //         $db->replicauserpassword = $request->replicationuserpassword;
+
+        //     if($request->pgbackrest == "yes"){
+        // 	    Storage::append('defaults.yml', 'pgbackrest: "yes"');
+        //         $pembagi = 172;
+        //         $db->pgbackrest = $request->pgbackrest;
+        //     }
+        //     else{
+        //         Storage::append('defaults.yml', 'pgbackrest: "no"');
+        //     }
+
+
+        //     if($request->pgpool == "yes"){
+        //         $this->validate($request, [
+        //             'pgpoolmasterhostname' => 'required|unique:dbs,hostname',
+        //             'pgpoolslavehostname' => 'required|unique:dbs,hostname'
+        //         ]);
+        //         $db->pgpoolmaster = $request->pgpoolmasterhostname;
+        //         $db->pgpoolslave = $request->pgpoolslavehostname;
+        //         $db->pgpoolusername = $request->pgpoolusername;
+        //         $db->pgpooluserpassword = $request->pgpooluserpassword;
+
+        //     Storage::append('defaults.yml', 'pgpool_user_name: "' . $request->pgpoolusername .'"' );
+        //     Storage::append('defaults.yml', '');
+        //         Storage::append('vars.yml', 'pgpool_user_password: "' . $request->pgpooluserpassword . '"');
+
+
+        //         Storage::prepend('hosts', '');
+        //         Storage::prepend('hosts', $request->pgpoolslavehostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', '[slave_pgpool]');
+
+        //         Storage::prepend('hosts', '');
+        //         Storage::prepend('hosts', $request->pgpoolmasterhostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', '[master_pgpool]');
+
+        //         Storage::prepend('hosts', '');
+        //         Storage::prepend('hosts', $request->pgpoolslavehostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', $request->pgpoolmasterhostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //     Storage::prepend('hosts', '[all_pgpool]');
+
+        //         Storage::prepend('hosts', '');
+        //         Storage::prepend('hosts', $request->pgpoolslavehostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', $request->pgpoolmasterhostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //     Storage::prepend('hosts', $request->standbyhostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', $request->hostname . ' ansible_user=pkrisantono ansible_password=piuskw77' );
+        //         Storage::prepend('hosts', '[all]');
+
+        //     }
+        //     else {
+        //     	Storage::append('defaults.yml', 'pgpool_user_name: "-"');
+        //     }
+        // }
+        //     else {
+        //             Storage::append('defaults.yml', 'replica_user_name: "-"' );
+        //             Storage::append('defaults.yml', '' );
+        //     }
+
+        //     $db->save();
+
+
+
+
+        //     $restcontents = ['network_device: "eth0"','delegate_netmask: "32"','delegate_ip: "172.18.32.10"','exporter_url: "https://github.com/wrouesnel/postgres_exporter/releases/download/v{{ exporter_version }}/postgres_exporter_v{{ exporter_version }}_linux-amd64.tar.gz"','exporter_path: /opt/exporter/postgres', 'exporter_port: "9104"', 'postgresdb_port: "5432"', 'exporter_version: "0.4.7"' , 'prometheus_user_username: "prometheus_user"
+        //     ', 'pg_repo: "https://download.postgresql.org/pub/repos/yum/{{ version }}/redhat/rhel-7-ppc64le/pgdg-centos{{ version }}-{{ version }}-2.noarch.rpm"'];
+
+        //     foreach($restcontents as $restcontent){
+        //         Storage::append('defaults.yml', $restcontent);
+        //     }
+
+        //     Storage::prepend('vars.yml', 'userpassword: "' . $request->superuserpassword . '"' );
+        //     Storage::prepend('defaults.yml', 'username: "' . $request->superusername . '"' );
+        //     Storage::prepend('defaults.yml', 'archive_log_path: "' . $request->archivedir . '"' );
+        //     Storage::prepend('defaults.yml', 'pg_log_path: "' . $request->logdir . '"' );
+        //     Storage::prepend('defaults.yml', 'dbname: "' . $request->dbname . '"' );
+        //     Storage::prepend('defaults.yml', 'version: "' . $request->version . '"' );
+
+        //     File::copy('/etc/aws-new-pgbackrest/storage/app/hosts','/etc/ansible/hosts');
+        // File::copy('/etc/aws-new-pgbackrest/storage/app/defaults.yml','/etc/ansible/roles/postgreInstallation/defaults/main.yml');
+
+        //     File::copy('/etc/aws-new-pgbackrest/storage/app/vars.yml','/etc/ansible/roles/postgreInstallation/vars/main.yml');
+
+
+        //exec('cp /mnt/c/Users/pius.wiatmojo/aws/storage/app/hosts /etc/ansible/hosts');
+        //exec('cp /mnt/c/Users/pius.wiatmojo/aws/storage/app/postgreInstallation/defaults/main.yml /etc/ansible/roles/postgreInstallation/defaults/main.yml');
+        //exec('cp /mnt/c/Users/pius.wiatmojo/aws/storage/app/postgreInstallation/vars/main.yml /etc/ansible/roles/postgreInstallation/vars/main.yml');
+
+        // ini_set('max_execution_time', 300);
+
+        // $a = popen('bash -c "ansible-playbook /etc/ansible/test.yml -i /etc/ansible/hosts --extra-vars ansible_sudo_pass=piuskw77"', 'r');
+
+        // echo '
+
+        // <style>
+        //     #progressbar {
+        //         background-color: lightgrey;
+        //         border-radius: 13px;
+        //         /* (height of inner div) / 2 + padding */
+        //         padding: 3px;
+        //         margin: 0 20px 10px 20px;
+        //     }
+
+        //     #progress {
+        //         background-color: green;
+        //         width:0;
+        //         /* Adjust with JavaScript */
+        //         height: 20px;
+        //         border-radius: 10px;
+        //     }
+        // </style>
+
+
+        // <script>
+        //     var scrolled = false;
+        //     function updateScroll(){
+        //         if(!scrolled){
+        //             var element = document.getElementById("content-ansible");
+        //             element.scrollTop = element.scrollHeight;
+        //         }
+        //     }
+
+        //     function updateLoad($persen){
+        //         var element2 = document.getElementById("progress");
+        //         element2.style.width = $persen + "%";
+        //     }
+
+        //     $("#content-ansible").on("scroll", function(){
+        //         scrolled=true;
+        //     });
+        // </script>
+
+
+        // <html style="background-color: #EFEFEF">
+        //     <body style="margin: 0; padding: 0; font-family: '."'" .'Helvetica Neue'. "'".', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.5; display: flex; align-items:center; justify-content: center;">
+        //     <div>
+        //         <div style="background-color: white; height: 50px; margin-bottom: 10px; width:650px; border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+        //             <div style="float: left; line-height:50px; line-height:50px; font-size: 20px;margin-left:20px; ">
+        //                     <strong>+</strong>Add Database
+        //             </div>
+        //             <div style="float:right; margin-right:20px;">
+        //                 <div style="display:inline-block; margin: 0 10px; height: 50px; line-height:50px;">DBMS</div>
+        //                 <div style="display:inline-block; margin: 0 10px;height: 50px; line-height:50px;">DB Details</div>
+        //                 <div style="display:inline-block; margin: 0 10px;height: 40px; line-height:50px;border-top:5px solid white; border-bottom: 5px solid #007bff;">Progress</div>
+        //             </div>
+
+        //         </div>
+
+        //         <div style="height:540px;width: 650px; background-color: white; border-radius: 10px; padding-top:20px; margin: 0 auto 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+
+        //             <div id="progressbar">
+        //                 <div id="progress"></div>
+        //             </div>
+
+
+        //             <div id="content-ansible" style="overflow: hidden;
+        //             text-overflow: ellipsis; overflow-y:auto;height: 460px; width: 610px; margin:0 20px 0 20px; background-color: lightgrey; border-radius:10px; color: green">
+
+        //         ';
+        //     $persen = 0;
+        //     $i = 0;
+        //     while($b = fgets($a, 2048)) {
+        //                     $i++;
+
+        //                     $persen = $i * 100 / $pembagi;
+        //             if($persen > 100)$persen = 100;
+        // 	    echo $b."<br>\n
+        //                     <script>
+        //                         updateLoad(".$persen.");
+        //                         updateScroll();
+        //                     </script>";
+        //                     ob_flush();flush();
+        //-------show button when automation finished--------
+        // if (strpos($b, 'failed=0') !== false) {
+        //     echo ' </div>
+
+        //             <div style=" float:right; margin-right:20px;width:auto;height:auto; background-color: #28a745; color: white; border-radius: 5px; padding: 10px;">Finish
+        //                     ';
+        // }
+
+        //     }
+        // echo '
+        //     </div>
+        //         </div>
+        //     </div>
+        //     </body>
+        // </html>';
+
+
+        // pclose($a);
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function edit($id)
+    { }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $servicename)
+    {
+        //
+
+        $this->validate($request, [
+            'servicename' => 'unique:dbs'
+        ]);
+
+
+
+        $db = Db::find($servicename);
+        $db->servicename = $request->servicename;
+        $db->dbengine = $request->dbengine;
+        $db->hostname = $request->hostname;
+        $db->superusername = $request->superusername;
+        $db->superuserpassword = $request->superuserpassword;
+
+        $db->replica =  $request->replica;
+        $db->replicausername =  $request->replicausername;
+        $db->replicauserpassword =  $request->replicauserpassword;
+
+        $db->pgpoolmaster =  $request->pgpoolmaster;
+        $db->pgpoolslave =  $request->pgpoolslave;
+        $db->save();
+
+        return redirect('/db')->with('success', 'DB Successfully Updated');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($servicename)
+    {
+        //
+        $db = Db::find($servicename);
+        $db->delete();
+
+        return redirect('/db')->with('error', 'DB Successfully Deleted');
+    }
+}
