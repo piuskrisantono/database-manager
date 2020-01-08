@@ -66,8 +66,7 @@ class LoginController extends Controller
 
         $user_format = env('LDAP_USER_FORMAT', 'cn=%s,' . env('LDAP_BASE_DN', ''));
         $userdn = sprintf($user_format, $username);
-
-        // you might need this, as reported in
+	// you might need this, as reported in
         // [#14](https://github.com/jotaelesalinas/laravel-simple-ldap-auth/issues/14):
         // Adldap::auth()->bind($userdn, $password);
 
