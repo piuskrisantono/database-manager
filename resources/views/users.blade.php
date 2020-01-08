@@ -88,7 +88,7 @@
 
             <div class="modal-footer" style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 10px;">
               <input type="hidden" name="_method" value="PUT" />
-              <button  type="submit"  class="btn btn-success">Save</button>
+              <button  type="submit"  class="btn btn-primary">Save</button>
             </form>
           <form   class="form-update" action="" method="POST">
               <input type="hidden" name="_method" value="DELETE" />
@@ -153,19 +153,13 @@
                         @endif
                     </td>
                     <td>
-                        <div class="btn-primary" onclick="changePopup(
+                        <div class="btn btn-primary" onclick="changePopup(
                             '<?php echo $user->id;?>',
                             '<?php echo $user->username;?>',
                             '<?php echo $user->role_id;?>',
                             '<?php echo $user->avatar;?>'
-                            )" style="display:grid; align-items: center; justify-content:center;width:30px; height:30px; border-radius:50%;">
-                                <i class="fa fa-edit" onclick="changePopup(
-                                    '<?php echo $user->id;?>',
-                                    '<?php echo $user->username;?>',
-                                    '<?php echo $user->role_id;?>',
-                                    '<?php echo $user->avatar;?>'
-                                    )"
-                                     style="cursor: pointer;" data-toggle="modal" data-target="#exampleModalCenter">
+                            )"  data-toggle="modal" data-target="#exampleModalCenter">
+                                <i class="fa fa-edit" >
                                </i>
                         </div>
                     </td>
@@ -230,7 +224,7 @@
     // }
 
     function changePopup(a,b,c,d) {
-        $('.form-update').attr('action' , 'http://127.0.0.1:8000/dba/user/'+a)
+        $('.form-update').attr('action' , 'http://127.0.0.1:8000/user/'+a)
 
         changePicture(d);
 

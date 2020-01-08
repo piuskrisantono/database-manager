@@ -135,9 +135,9 @@ a:hover {
     <i class="fa fa-envelope" style="{{ (request()->is('/dbrequest')) ? 'color: white;font-weight: 600' : '' }}"></i>
     <span style="{{ (request()->is('/dbrequest')) ? 'color: white;font-weight: 600' : '' }}">Request</span>
   </a>
-  <a href="{{ route('dba.user.index') }}" class="{{ (request()->is('dba/user')) ? 'active' : '' }}">
-    <i class="fa fa-user" style="{{ (request()->is('dba/user')) ? 'color: white;font-weight: 600' : '' }}"></i>
-    <span style="{{ (request()->is('dba/user')) ? 'color: white;font-weight: 600' : '' }}">Manage Users</span>
+  <a href="/user" class="{{ (request()->is('/user')) ? 'active' : '' }}">
+    <i class="fa fa-user" style="{{ (request()->is('/user')) ? 'color: white;font-weight: 600' : '' }}"></i>
+    <span style="{{ (request()->is('/user')) ? 'color: white;font-weight: 600' : '' }}">Manage Users</span>
   </a>
   <a href="/history" class="{{ (request()->is('/history')) ? 'active' : '' }}">
     <i class="fa fa-clock" style="{{ (request()->is('/history')) ? 'color: white;font-weight: 600' : '' }}"></i>

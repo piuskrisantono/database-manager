@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\DBA;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('dba.users')->with('users', User::paginate(8));
+        return view('users')->with('users', User::paginate(8));
     }
 
     /**
@@ -77,7 +77,7 @@ class UserController extends Controller
         $user->role_id = $request->role;
         $user->save();
 
-        return redirect('/dba/user')->with('success', 'User Successfully Updated');
+        return redirect('/user')->with('success', 'User Successfully Updated');
     }
 
     /**
@@ -91,6 +91,6 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
 
-        return redirect('/dba/user')->with('error', 'User Successfully Deleted');
+        return redirect('/user')->with('success', 'User Successfully Deleted');
     }
 }

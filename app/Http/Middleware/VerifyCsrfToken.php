@@ -22,7 +22,7 @@ class VerifyCsrfToken extends Middleware
         //
         'db/*',
         '/login',
-        '/dba/user*',
+        '/user*',
         '/dbrequest*',
         '/cancelrequestready*',
         'dbrequest/installed',
