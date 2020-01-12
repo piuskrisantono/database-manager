@@ -1,373 +1,194 @@
-
 @extends('layouts.master')
 
 @section('content')
+
 <style>
-
-
-
-    #content-container{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-column-gap: 1vw;
-        grid-row-gap: 1vw;
+    .content-box{
+        padding: 15px;
     }
-
-    .db-choice {
-    width: 48%;
-    }
-
-    .db-choice img {
-    width: 150px;
-    height: 150px;
-    }
-
-    .btn-version{
-    width: 49%;
-    }
-
-
-
-    label:hover {
-        cursor: pointer;
-    }
-
-    .content-hostname{
-        display: grid;
-        grid-template-columns: 1fr;
-    }
-
-    input[type=radio]{
-        border-radius: 0;
-    }
-
-
-    .list-hostname {
-        display: grid;
-        justify-content: space-between;
-        grid-template-columns: auto auto;
-        align-items: center;
-        padding: 5px;
-        border: 1px lightgrey solid;
-    }
-    .list-hostname-header {
-        border: none;
-        padding: 10px 0;
-    }
-
-    .list-hostname-header h5 {
-        font-weight: 600;
-    }
-
-    .step-tab {
-        height: 50px;
-        display: inline-block;
-        text-align: center;
-        vertical-align: middle;
-        line-height: 50px;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .step-now {
-        border-bottom: 5px solid #007bff;
-    }
-
-
-
-
-
 </style>
 
 
 
+<div class="py-4" style="margin: auto">
 
-    <div class="d-flex justify-content-between mx-3 mt-4 shadow-sm py-0 content" style="height: 50px; margin-bottom: 15px;">
-        <div class="my-auto" style="font-size: 20px;">
-              Install
+        <div class="d-flex justify-content-between mx-3 px-3 shadow-sm py-0 content-box" style="background-color: white; height: 50px; margin-bottom: 10px;">
+                <div class="title-tab my-auto" style="font-size: 20px; overflow:hidden">
+                    Create Request
+                </div>
         </div>
 
-            <div class="my-auto">
-                <div id="first" class="step-tab step-now">DBMS</div>
-                <div id="second" class="step-tab">DB Details</div>
-                <div id="third" class="step-tab">Progress</div>
-            </div>
+        <div class="content-box p-auto shadow-sm mx-3">
+                <form  action="/dbrequest" method="POST">
+                  @csrf
 
-      </div>
+                      <div class="my-2">Database Management System</div>
+                    <div style="display: grid; grid-column-gap: 10px; grid-template-columns: 1fr 1fr;">
+                          <label class="btn btn-outline-primary"><input id="request-postgres" type="radio" name="request-dbms" name=""> PostgreSQL</label>
+                          <label class="btn btn-outline-success"><input  id="request-mongo" type="radio" name="request-dbms"> MongoDB</label>
+                          <input id="request-type" type="text" name="requestType" value="" hidden>
+                    </div>
+                    <label for="service-name" class="col-form-label">Service Name</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="service-name" name="serviceName">
+                    <div class="input-group-append">
+                          <span class="input-group-text" id="request-extension">db-XX.wallet.lokal</span>
+                      </div>
+                  </div>
 
+                  <div style="display: grid; grid-template-columns: 3fr 2fr; margin-top:15px; grid-column-gap: 15px;">
 
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false" style="min-width: 100%;">
-            <div class="carousel-inner">
-                <form action="/dbrequest/install" method="POST">
-                    @csrf
-                    <div class="carousel-item px-3 pb-3 active">
-                          <div class="d-flex flex-column p-4 shadow-sm align-items-center content-box">
-                              <div class="d-block mb-3" style="width: 100%;"><i class="fa fa-arrow-circle-right" aria-hidden="true" style="margin-right: 5px"></i><strong>Choose DBMS</strong>
-                              </div>
-
-                              <div class="d-flex flex-row justify-content-between my-4">
-
-                                        <div class="db-choice d-flex flex-column">
-                                            <div class="d-flex flex-row justify-content-center mb-4">
-                                                      <div style="width: 200px; height: 200px; border: solid lightgrey 2px; border-radius: 50%;background-color: white;">
-                                                      <div  style="width: 100%; height: 100%;  border-radius: 50%;background-repeat: no-repeat; background-image: url({{ asset('img/postgres.png') }}); background-position: center; background-size: 50%;">
-                                                      </div>
-                                                      </div>
-                                            </div>
-
-                                            <h5 class="card-title">PostgreSQL</h5>
-                                            <p class="card-text">A relational database management system (RDBMS) emphasizing extensibility and technical standards compliance.</p>
-                                            <p class="mt-auto">Available Version</p>
-
-                                            <div class="d-flex justify-content-between mt-auto">
-                                                  <button href="#carouselExampleControls" data-slide="next" type="button" id="postgresql-10" class="btn btn-primary btn-version">10</button>
-                                                  <button href="#carouselExampleControls" data-slide="next" type="button" id="postgresql-11" class="btn btn-primary btn-version">11</button>
-                                            </div>
-                                        </div>
-
-                                        <div style="height:auto; min-width: 1px; background-color:lightgrey;">
-                                        </div>
-
-                                        <div class="db-choice d-flex flex-column">
-                                            <div class="d-flex flex-row justify-content-center mb-4">
-                                                    <div style="width: 200px; height: 200px; border: solid lightgrey 2px; border-radius: 50%;background-color: white;">
-                                                    <div  style="width: 100%; height: 100%;  border-radius: 50%;background-repeat: no-repeat; background-image: url({{ asset('img/mongodb.png') }}); background-position: center; background-size: 50%;">
-                                                    </div>
-                                                    </div>
-                                            </div>
-
-                                            <h5 class="card-title">MongoDB</h5>
-                                            <p class="card-text">A NoSQL document-oriented database program, MongoDB uses JSON-like documents with schemata.</p>
-                                            <p class="mt-auto">Available Version</p>
-
-                                            <div class="d-flex justify-content-between mt-auto">
-                                                <button href="#carouselExampleControls" data-slide="next" type="button" id="mongodb-34" class="btn btn-primary btn-version">3.4</button>
-                                                <button href="#carouselExampleControls" data-slide="next" type="button" id="mongodb-36" class="btn btn-primary btn-version">3.6</button>
-                                            </div>
-                                        </div>
-
-                              </div>
-                            <input id="version" type="text" name="version" value="" hidden>
+                          <div style="grid-row: 1/3">
+                              <div class="my-2">To be Requested</div>
+                              <ul id="request-list" class="list-group ">
+                                      <li class="list-group-item"><span id="db-primary-name"></span><span>db-01.wallet.lokal</span></li>
+                                      <li id="db-secondary" class="list-group-item"><span id="db-secondary-name"></span><span>db-02.wallet.lokal</span></li>
+                                      <li id="pgbouncer-primary" class="list-group-item"><span id="pgbouncer-primary-name"></span>pgbouncer-01.wallet.lokal</li>
+                                      <li id="pgbouncer-secondary" class="list-group-item"><span id="pgbouncer-secondary-name"></span>pgbouncer-02.wallet.lokal</li>
+                                      <li id="db-arbiter" class="list-group-item"><span id="db-arbiter-name"></span>arb-01.wallet.lokal</li>
+                              </ul>
                           </div>
 
-                      </div>
+                          <div>
+
+                                  <div class="my-2">Database VM Spec</div>
 
 
-                      <div class="carousel-item px-3">
+                                      <div>
+                                              <div class="form-group row">
+                                                      <label for="inputPassword" class="col-sm-4 col-form-label">CPU</label>
+                                                      <div class="col-sm-4">
+                                                              <select  class="form-control" id="exampleSelect1" name="requestCpu">
+                                                                      <option>2</option>
+                                                                      <option>4</option>
+                                                                      <option>8</option>
+                                                                      <option>16</option>
+                                                                      <option>32</option>
+                                                                      <option>64</option>
+                                                                    </select>
+                                                      </div>
+                                                      <label for="inputPassword" class="col-sm-4 col-form-label">Cores</label>
+                                              </div>
+                                      </div>
+                                      <div>
+                                              <div class="form-group row">
+                                                      <label for="inputPassword" class="col-sm-4 col-form-label">Memory</label>
+                                                      <div class="col-sm-4">
+                                                      <select class="form-control"  id="exampleSelect1" name="requestMemory">
+                                                              <option>4</option>
+                                                              <option>8</option>
+                                                              <option>16</option>
+                                                              <option>32</option>
+                                                              <option>64</option>
+                                                              <option>128</option>
+                                                      </select>
 
-                            <div id="content-container">
+                                                  </div>
+                                                  <label for="inputPassword" class="col-sm-4 col-form-label">GB</label>
+                                          </div>
+                                      </div>
 
+                          </div>
+                  </div>
 
-                                    <div class="content shadow-sm">
-                                        <div class="list-hostname  list-hostname-header">
-                                            <h5 >Available Hosts</h5>
+                  <div class="my-2">Disk Partition</div>
+                  <div style="display: grid; grid-template-columns: 3fr 2fr;grid-column-gap: 15px;">
+                      <div>
+                          <table class="table table-bordered">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Partition Name</th>
+                                  <th scope="col">Partition Size (GB)</th>
+                                  {{-- <th scope="col">Action</th> --}}
 
-                                        </div>
-                                        <div id="list-before" style="display: grid; grid-template-columns: 1fr; border-radius:5px; border: 1px solid lightgrey; overflow:hidden;">
+                                </tr>
+                              </thead>
+                              <tbody id="listDisk">
+                                <tr id="firstDisk">
+                                  <td><input id="firstDiskName" readonly type="text" class="form-control"  name="requestedDiskName[]"></td>
+                                  <td><input id="firstDiskSize" type="text" class="form-control" name="requestedDiskSize[]"></td>
 
-                                        </div>
-                                    </div>
+                                </tr>
+                                <tr id="secondDisk" style="display: none;">
+                                  <td><input id="secondDiskName" readonly type="text" class="form-control"  name="requestedDiskName[]"></td>
+                                  <td><input id="secondDiskSize" type="text" class="form-control" name="requestedDiskSize[]"></td>
 
-                                    <div class="content shadow-sm">
-                                            <div class="list-hostname  list-hostname-header">
-                                                <h5>To be Installed</h5>
+                                </tr>
+                                <tr id="thirdDisk" style="display: none;">
+                                  <td><input id="thirdDiskName" readonly type="text" class="form-control"  name="requestedDiskName[]"></td>
+                                  <td><input id="thirdDiskSize" type="text" class="form-control" name="requestedDiskSize[]"></td>
 
-                                            </div>
-                                            <div id="list-after" style="border-radius:5px; border: 1px solid lightgrey; overflow:hidden;">
+                                </tr>
+                                <tr id="fourthDisk" style="display: none;">
+                                  <td><input id="fourthDiskName" readonly type="text" class="form-control"  name="requestedDiskName[]"></td>
+                                  <td><input id="fourthDiskSize" type="text" class="form-control" name="requestedDiskSize[]"></td>
 
-                                            </div>
-
-                                    </div>
-                                </div>
-
-                              <div class="d-flex flex-row justify-content-center pt-4" id="box-button">
-                                <div class="d-flex flex-row-reverse " style="width: 100%;">
-                                    <button class="btn btn-lg btn-primary border shadow-sm" type="submit" name="deploy">Install</button>
-                                    <button onclick="goBack()" type="button" href="#carouselExampleControls" class="btn btn-lg btn-light mx-2 border shadow-sm" data-slide="prev">Back</button>
-                                </div>
-                              </div>
-
-
-
-                    </div>
-
-
-
-                </form>
-
-                </div>
-
-              </div>
-
-
-
-
-
+                                </tr>
+                              </tbody>
+                            </table>
+                            {{-- <div class="btn btn-success" id="addDisk" style="cursor: pointer;"><i class="fa fa-plus"></i> Add Disk</div> --}}
+                          </div>
 
 
 
+                  </div>
 
 
+
+
+
+
+                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope"></i> Send Request</button>
+
+          </form>
+        </div>
+
+
+
+</div>
+@endsection
 
 <script>
 
-    function goBack(){
-        $("#first").addClass("step-now");
-        $("#second").removeClass("step-now");
-    }
+window.onload = function(){
+
+$('#firstDiskName').val('/');
+$('#firstDiskSize').val('20');
 
 
-
-
-
-
-
-    window.onload = function(){
-        const listAfter = document.querySelector('#list-after');
-        const listBefore = document.querySelector('#list-before');
-
-
-
-        class Item{
-            constructor(itemName){
-                this.itemBox = document.createElement('div');
-                this.itemBox.classList.add('list-hostname');
-
-                this.boxName = document.createElement('div');
-                this.boxNameText = document.createTextNode(itemName);
-
-                this.aButton = document.createElement('button');
-
-                this.boxName.appendChild(this.boxNameText);
-                this.itemBox.appendChild(this.boxName);
-                this.itemBox.appendChild(this.aButton);
-
-
-
-            }
-        }
-
-
-        class ItemBefore extends Item {
-            constructor(itemName){
-                super(itemName);
-
-
-                this.aButton.classList.add('btn', 'btn-success');
-
-                var aButtonText = document.createTextNode("Add");
-                this.aButton.appendChild(aButtonText);
-
-                listBefore.appendChild(this.itemBox);
-
-                this.aButton.addEventListener('click', () => this.add(this.itemBox, itemName));
-
-            }
-
-            add(itemBox, itemName){
-                listBefore.removeChild(itemBox);
-                new ItemAfter(itemName);
-            }
-        }
-
-        class ItemAfter extends Item {
-            constructor(itemName){
-                super(itemName);
-
-                this.aButton.classList.add('btn', 'btn-danger');
-
-                this.inputButton = document.createElement('input');
-                this.itemBox.appendChild(this.inputButton);
-
-                this.inputButton.setAttribute('name', 'installDatabase[]');
-                this.inputButton.setAttribute('value', itemName);
-                this.inputButton.setAttribute('type', 'hidden');
-
-                var aButtonText = document.createTextNode("Remove");
-                this.aButton.appendChild(aButtonText);
-
-
-                listAfter.appendChild(this.itemBox);
-
-                this.aButton.addEventListener('click', () => this.remove(this.itemBox, itemName));
-            }
-
-            remove(itemBox, itemName){
-                listAfter.removeChild(itemBox);
-                new ItemBefore(itemName);
-            }
-        }
-
-        @foreach ($dbs as $db)
-                    new ItemBefore('{{$db->servicename}}');
-        @endforeach
-
-
-
-        $('#addDisk').click(function(){
-            new Disk();
-        })
-
-
-
-
-        $("#postgresql-10").click(function(){
-            $(".checklist-postgres").show();
-            $("#version").val("10");
-            $("#second").addClass("step-now");
-            $("#first").removeClass("step-now");
-        });
-
-        $("#postgresql-11").click(function(){
-            $(".checklist-postgres").show();
-            $("#version").val("11");
-            $("#second").addClass("step-now");
-            $("#first").removeClass("step-now");
-        });
-
-        $('#mongodb-34').click(function(){
-            $('.checklist-postgres').hide();
-            $("#version").val("3.4");
-            $("#second").addClass("step-now");
-            $("#first").removeClass("step-now");
-        });
-
-
-        $('#mongodb-36').click(function(){
-            $('.checklist-postgres').hide();
-            $("#version").val("3.6");
-            $("#second").addClass("step-now");
-            $("#first").removeClass("step-now");
-        });
-
-
-        $('#button-modal-show').click(function(){
-            $('#request-postgres').prop('checked', false);
-            $('#request-mongo').prop('checked', false);
-            $('#service-name').val("");
-            $('#db-primary-name').text("");
-            $('#db-secondary-name').text("");
-            $('#pgbouncer-primary-name').text("");
-            $('#pgbouncer-secondary-name').text("");
-            $('#db-arbiter-name').text("");
-        })
 
         $('#pgbouncer-primary').hide();
         $('#pgbouncer-secondary').hide();
         $('#db-arbiter').hide();
 
-
         $('#request-postgres').click(function(){
             $('#pgbouncer-primary').show();
             $('#pgbouncer-secondary').show();
             $('#db-arbiter').hide();
-            $('#request-type').val('postgres');
+            $('#request-type').val('Postgres');
+            $('#secondDisk').css('display', 'table-row');
+            $('#secondDiskName').val('/db');
+            $('#secondDiskSize').val('50');
+            $('#thirdDisk').css('display', 'table-row');
+            $('#thirdDiskName').val('/archive_log');
+            $('#thirdDiskSize').val('50');
+            $('#fourthDisk').css('display', 'table-row');
+            $('#fourthDiskName').val('/pg_log');
+            $('#fourthDiskSize').val('10');
         })
         $('#request-mongo').click(function(){
             $('#pgbouncer-primary').hide();
             $('#pgbouncer-secondary').hide();
             $('#db-arbiter').show();
-            $('#request-type').val('mongo');
+            $('#request-type').val('Mongo');
+            $('#secondDisk').css('display', 'table-row');
+            $('#secondDiskName').val('/data');
+            $('#secondDiskSize').val('50');
+            $('#thirdDisk').css('display', 'table-row');
+            $('#thirdDiskName').val('/logs');
+            $('#thirdDiskSize').val('10');
+            $('#fourthDisk').css('display', 'none');
+
         })
 
         $('#service-name').on('input', function(){
@@ -378,17 +199,7 @@
             $('#db-arbiter-name').text($('#service-name').val());
         })
 
-    }
+        $('#request-postgres').trigger('click');
+}
 
 </script>
-
-
-
-
-
-@endsection
-
-
-
-
-

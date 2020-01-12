@@ -4,23 +4,23 @@
 
 
 <?php
-$ch = curl_init();
+// $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, 'http://172.22.252.137:9100/metrics');
+// curl_setopt($ch, CURLOPT_URL, 'http://172.22.252.137:9100/metrics');
 
-// curl_setopt($ch, CURL_RETURNTRANSFER, 1);
+// // curl_setopt($ch, CURL_RETURNTRANSFER, 1);
 
-// curl_setopt($ch, CURL_OPT_HEADER, 0);
+// // curl_setopt($ch, CURL_OPT_HEADER, 0);
 
-$output = curl_exec($ch);
+// $output = curl_exec($ch);
 
-if($output === FALSE){
-    echo "cURL Error" . curl_error($ch);
-}
+// if($output === FALSE){
+//     echo "cURL Error" . curl_error($ch);
+// }
 
-curl_close($ch);
+// curl_close($ch);
 
-print_r($output);
+// print_r($output);
 
 ?>
 

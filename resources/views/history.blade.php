@@ -58,7 +58,7 @@
                             @endif
                         </tbody>
                       </table>
-                <div class="d-flex flex-row-reverse px-3">
+                <div class="d-flex flex-row-reverse px-3" style="max-height: 50px;">
                         {{ $histories->links() }}
                 </div>
         </div>

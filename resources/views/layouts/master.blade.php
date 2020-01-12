@@ -126,15 +126,16 @@ a:hover {
   <a>
     <i class="fa fa-plus" style="{{ (request()->is('db/create')) ? 'color: white;font-weight: 600' : '' }}"></i>
     <span style="{{ (request()->is('db/create')) ? 'color: white;font-weight: 600' : '' }}">Create</span>
-  </a>
-  <a href="/dbrequest/create" class="{{ (request()->is('deploy')) ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
-    <i class="fa fa-play" style="{{ (request()->is('deploy')) ? 'color: white;font-weight: 600' : '' }}"></i>
-    <span style="{{ (request()->is('deploy')) ? 'color: white;font-weight: 600' : '' }}">Deploy</span>
-  </a>
+
   <a href="/dbrequest" class="{{ (request()->is('/dbrequest')) ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
     <i class="fa fa-envelope" style="{{ (request()->is('/dbrequest')) ? 'color: white;font-weight: 600' : '' }}"></i>
     <span style="{{ (request()->is('/dbrequest')) ? 'color: white;font-weight: 600' : '' }}">Request</span>
   </a>
+</a>
+<a href="/viewInstaller" class="{{ (request()->is('/viewInstaller')) ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
+  <i class="fa fa-play" style="{{ (request()->is('/viewInstaller')) ? 'color: white;font-weight: 600' : '' }}"></i>
+  <span style="{{ (request()->is('/viewInstaller')) ? 'color: white;font-weight: 600' : '' }}">Install</span>
+</a>
   <a href="/user" class="{{ (request()->is('/user')) ? 'active' : '' }}">
     <i class="fa fa-user" style="{{ (request()->is('/user')) ? 'color: white;font-weight: 600' : '' }}"></i>
     <span style="{{ (request()->is('/user')) ? 'color: white;font-weight: 600' : '' }}">Manage Users</span>

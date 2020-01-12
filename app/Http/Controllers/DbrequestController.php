@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dbrequest;
+use App\Events\NewInstalledDatabaseEvent;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -25,17 +26,18 @@ class DbrequestController extends Controller
         return view('db.request', ['dbs' => $dbrequest]);
     }
 
+    public function create()
+    {
+
+        return view("db.create");
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-        $dbs = Dbrequest::where('requestedvip', '!=', null)->where('requestedvip', '!=', '')->where('vmstatus', true)->get();
-        return view('db.create', ['dbs' => $dbs]);
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -78,17 +80,9 @@ class DbrequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function edit($servicename)
     {
         $dbrequest = Dbrequest::find($servicename);
@@ -210,20 +204,35 @@ class DbrequestController extends Controller
 
         return redirect('/dbrequest')->with('success', 'Successfully Canceled VM');
     }
-    public function install(Request $request)
+
+
+    public function viewInstaller()
+    {
+        //
+        $dbs = Dbrequest::where('requestedvip', '!=', null)->where('requestedvip', '!=', '')->where('vmstatus', true)->get();
+        return view('db.install', ['dbs' => $dbs]);
+    }
+
+
+
+    public function runInstaller(Request $request)
     {
         $dbrequest = Dbrequest::whereIn('servicename', $request->installDatabase);
 
         $dbrequest->update(['installed' => 'On Progress']);
 
-        $listdatabase = $dbrequest->get();
-
-        $listdatabase = implode(", ", $listdatabase);
-
-        HistoryController::store(Auth::user()->id, "installed database for service", $listdatabase, "");
+        $dbrequestservicename = $dbrequest->pluck('servicename')->toArray();
 
 
-        return redirect('db/create')->with('success', 'Successfully Installed DB');
+        foreach ($dbrequestservicename as $dbservicename) {
+
+            HistoryController::store(Auth::user()->id, "installed database for service", $dbservicename, "");
+        }
+
+        event(new NewInstalledDatabaseEvent($dbrequestservicename));
+
+
+        return redirect('/')->with('success', 'Successfully Installed DB');
     }
 
     public function getInstalled()
@@ -233,6 +242,7 @@ class DbrequestController extends Controller
 
         return view('db.dbinstance', ['dbs' => $dbs]);
     }
+
 
     public function authDb(Request $request)
     {

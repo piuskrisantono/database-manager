@@ -32,13 +32,13 @@ Route::middleware(['auth', 'auth.dba'])->group(function () {
     Route::post('/dbrequest/installed/modify-config', 'DbrequestController@modifyConfig');
 
     Route::get('/', 'DbrequestController@getInstalled')->middleware(['auth', 'auth.dba']);
-    Route::resource('/db', 'DbController')->middleware(['auth', 'auth.dba']);
 
+    Route::get('/viewInstaller', 'DbrequestController@viewInstaller');
     Route::resource('/dbrequest', 'DbrequestController');
     Route::put('/dbrequest/cancelrequestready/{servicename}', 'DbrequestController@cancelVmStatus');
-    Route::post('/dbrequest/install', 'DbrequestController@install');
+
+    Route::post('/dbrequest/install', 'DbrequestController@runInstaller');
 
 
     Route::get('/history', 'HistoryController@index')->middleware(['auth', 'auth.dba']);
-    Route::post('/history', 'DbrequestController@install');
 });
