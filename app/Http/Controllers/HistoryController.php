@@ -11,7 +11,7 @@ class HistoryController extends Controller
 
     public function index()
     {
-        $histories = History::with(['user'])->orderBy('created_at', 'DESC')->paginate(10);
+        $histories = History::with(['user'])->orderBy('created_at', 'desc')->paginate(10);
 
         return view('history')->with(['histories' => $histories]);
     }

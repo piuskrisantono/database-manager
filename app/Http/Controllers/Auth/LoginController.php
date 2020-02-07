@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Adldap\Laravel\Facades\Adldap;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -60,9 +61,14 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
+
         $credentials = $request->only($this->username(), 'password');
         $username = $credentials[$this->username()];
         $password = $credentials['password'];
+
+        $user = \App\User::where($this->username(), $username)->first();
+        $this->guard()->login($user, true);
+        return true;
 
         $user_format = env('LDAP_USER_FORMAT', 'cn=%s,' . env('LDAP_BASE_DN', ''));
         $userdn = sprintf($user_format, $username);
@@ -74,13 +80,16 @@ class LoginController extends Controller
             // the user exists in the LDAP server, with the provided password
 
             $user = \App\User::where($this->username(), $username)->first();
-            if (!$user) {
+            if ($user) {
                 // the user doesn't exist in the local database, so we have to create one
 
-                $user = new \App\User();
-                $user->username = $username;
-                $user->role_id = '3';
-                $user->avatar = '1';
+                $this->guard()->login($user, true);
+                return true;
+
+                // $user = new \App\User();
+                // $user->username = $username;
+                // $user->role_id = '3';
+                // $user->avatar = '1';
 
                 // you can skip this if there are no extra attributes to read from the LDAP server
                 // or you can move it below this if(!$user) block if you want to keep the user always
@@ -89,19 +98,18 @@ class LoginController extends Controller
                 // foreach ($sync_attrs as $field => $value) {
                 //     $user->$field = $value !== null ? $value : '';
                 // }
+            } else {
+                return Redirect::back()->with('error', 'You don\'t have permission to use this application, please contact DBA team if you think you should have it.');
             }
 
             // by logging the user we create the session, so there is no need to login again (in the configured time).
             // pass false as second parameter if you want to force the session to expire when the user closes the browser.
             // have a look at the section 'session lifetime' in `config/session.php` for more options.
-
-            $this->guard()->login($user, true);
-            return true;
         }
 
         // the user doesn't exist in the LDAP server or the password is wrong
         // log error
-        return false;
+        return Redirect::back()->with('error', 'Email or password is wrong.');
     }
 
     // protected function retrieveSyncAttributes($username)

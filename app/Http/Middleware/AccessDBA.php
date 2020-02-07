@@ -16,11 +16,10 @@ class AccessDBA
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->hasRole('dba')){
+        if (Auth::user()->role_id == '1') {
             return $next($request);
         }
 
-        return redirect('home');
-
+        return redirect('/dbrequest');
     }
 }

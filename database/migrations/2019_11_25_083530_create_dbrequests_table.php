@@ -14,7 +14,7 @@ class CreateDbrequestsTable extends Migration
     public function up()
     {
         Schema::create('dbrequests', function (Blueprint $table) {
-            $table->string('servicename');
+            $table->string('servicename')->unique();
             $table->string('engine');
             $table->smallInteger('requestedcpu');
             $table->smallInteger('requestedmemory');

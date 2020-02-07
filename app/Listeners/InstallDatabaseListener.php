@@ -13,7 +13,7 @@ class InstallDatabaseListener implements ShouldQueue
     public function handle(NewInstalledDatabaseEvent $event)
     {
 
-        sleep(15);
+        sleep(60);
 
 
         $dbrequest = Dbrequest::whereIn('servicename', $event->dbrequestservicename);

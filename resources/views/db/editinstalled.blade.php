@@ -1,0 +1,147 @@
+@extends('layouts.master')
+
+@section('content')
+
+<style>
+    .content-box{
+        padding: 15px;
+    }
+
+    #form-content {
+        grid-row-gap: 15px;
+    }
+    #form-content > div, #dbms-form {
+        border: 1px solid lightgrey;
+        padding: 15px;
+        border-radius: 5px;
+    }
+</style>
+
+
+
+<div class="py-4" style="margin: auto">
+
+        <div class="d-flex justify-content-between mx-3 px-3 shadow-sm py-0 content-box" style="background-color: white; height: 50px; margin-bottom: 10px;">
+                <div class="title-tab my-auto" style="font-size: 20px; overflow:hidden">
+                    Edit Database
+                </div>
+                <div style="display:grid; align-items:center;">
+                    <a href="/" class="btn btn-primary" style="width: 150px;">Cancel</a>
+                </div>
+
+        </div>
+
+        <div class="content-box p-auto shadow-sm mx-3">
+                <form  action="/updateInstalled/{{$dbrequest->servicename}}" method="POST">
+                  @csrf
+                  <input type="hidden" name="_method" value="PUT" />
+
+
+
+
+
+
+
+                  <div id= "form-content" style="display: grid; grid-template-columns: 1fr 1fr;grid-column-gap: 15px;">
+
+                    <div id="dbms-form" style="grid-column: 1/3; display: grid; grid-column-gap: 10px; grid-template-columns: auto 1fr 1fr 1fr 1fr; align-items:center; padding: 15px;">
+                        <span>Database Management System</span>
+                        <label class="btn btn-outline-primary my-auto"><input id="postgres10" type="radio"> PostgreSQL 10</label>
+                        <label class="btn btn-outline-primary my-auto"><input id="postgres11" type="radio"> PostgreSQL 11</label>
+                        <label class="btn btn-outline-success my-auto"><input  id="mongo34" type="radio"> MongoDB 3.4</label>
+                        <label class="btn btn-outline-success my-auto"><input  id="mongo36" type="radio"> MongoDB 3.6</label>
+                        <input id="request-type" type="text" name="version" value="" hidden>
+                    </div>
+
+                        <div>
+                            <label for="service-name" >Service Name</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="service-name" name="servicename" value="{{$dbrequest->servicename}}">
+                                <div class="input-group-append">
+                                        <span class="input-group-text" id="request-extension">db-XX.wallet.lokal</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <label for="service-name" >Virtual IP</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control" id="service-name" name="requestedvip" value="{{$dbrequest->requestedvip}}">
+                            </div>
+                        </div>
+
+
+
+
+                  </div>
+
+
+
+
+
+
+                  <div class="d-flex flex-row-reverse mt-3">
+                    <button type="submit" class="btn btn-primary" style="width:150px;"><i class="fa fa-edit"></i> Edit Database</button>
+                  </div>
+
+
+
+          </form>
+        </div>
+
+
+
+</div>
+@endsection
+
+<script>
+
+window.onload = function(){
+
+
+        $('#request-postgres').click(function(){
+            $('#request-type').val('Postgres');
+        })
+        $('#request-mongo').click(function(){
+            $('#request-type').val('Mongo');
+        })
+
+
+
+
+        $('#service-name').on('input', function(){
+            $('#db-primary-name').text($('#service-name').val());
+            $('#db-secondary-name').text($('#service-name').val());
+            $('#pgbouncer-primary-name').text($('#service-name').val());
+            $('#pgbouncer-secondary-name').text($('#service-name').val());
+            $('#db-arbiter-name').text($('#service-name').val());
+        })
+
+        $('#postgres10').click(function(){
+            $('#request-type').val('PostgreSQL 10');
+        })
+        $('#postgres11').click(function(){
+            $('#request-type').val('PostgreSQL 11');
+        })
+        $('#mongo34').click(function(){
+            $('#request-type').val('MongoDB 3.4');
+        })
+        $('#mongo36').click(function(){
+            $('#request-type').val('MongoDB 3.6');
+        })
+
+        if ("{{$dbrequest->engine}}" === "PostgreSQL 10") {
+            $('#postgres10').trigger("click");
+        } else if ("{{$dbrequest->engine}}" === 'PostgreSQL 11') {
+            $('#postgres11').trigger("click");
+        } else if ("{{$dbrequest->engine}}" === 'MongoDB 3.4') {
+            $('#mongo34').trigger("click");
+        } else {
+            $('#mongo36').trigger("click");
+        }
+
+
+}
+
+</script>

@@ -145,6 +145,34 @@
 </style>
 
 
+<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Delete Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+        <div class="modal-body">
+            Are you sure you want to delete <b id="servicetext"></b>?
+        </div>
+
+        <form action="" method="POST" id="deleteForm">
+            <input type="hidden" name="_method" value="DELETE" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger" type="submit">Delete</button>
+            </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
 
 
     <div class="d-flex justify-content-between mx-3 mt-4 shadow-sm py-0 content" style="height: 50px; margin-bottom: 15px;">
@@ -153,8 +181,8 @@
         </div>
 
             <div class="my-auto">
-                <a class="btn btn-primary" href="/dbrequest/create">
-                    Request a VM
+                <a class="btn btn-primary" href="/dbrequest/create" style="width: 150px;">
+                    Create a Request
                 </a>
 
             </div>
@@ -171,29 +199,40 @@
          </div>
 
        <div style="width: 100%; display: grid; grid-template-columns: repeat(4, 1fr);grid-row-gap: 15px;grid-column-gap: 15px;">
-            @foreach($dbs as $db)
-            @if($db->requestedvip != null && $db->requestedvip != "" && $db->vmstatus != false)
-
-                <div class="content px-3 py-1 shadow-sm" style="border: 2px solid {{($db->engine == 'Postgres' ? '#3498db': '#2ecc71')}};display: flex; align-items: center; width: 250px; border-radius: 5px;">
-                    <div class="mr-3">
-                        <div style="width: 50px; height: 50px;border-radius: 50%;background-color: lightgrey;">
-                            <div  style="width:50px; height: 50px;  border-radius: 50%;background-repeat: no-repeat; background-image: url({{ asset(($db->engine == 'Postgres' ? 'img/postgres.png': 'img/mongodb.png')) }}); background-position: center; background-size: 50%;">
+        @php
+            $counter = 0;
+        @endphp
+                @foreach($dbs as $db)
+                @if(($db->engine == 'Postgres' && $db->requestedvip != null && $db->vmstatus != false) || ($db->engine == 'Mongo'  && $db->vmstatus != false))
+                    @php
+                        $counter++;
+                    @endphp
+                    <div class="content px-3 py-2 py-1 shadow-sm" style="border: 1px solid {{($db->engine == 'Postgres' ? '#3498db': '#2ecc71')}};display: flex; align-items: center; width: 250px; border-radius: 5px;">
+                        <div class="mr-3">
+                            <div style="width: 50px; height: 50px;border-radius: 50%;background-color: lightgrey;">
+                                <div  style="width:50px; height: 50px;  border-radius: 50%;background-repeat: no-repeat; background-image: url({{ asset(($db->engine == 'Postgres' ? 'img/postgres.png': 'img/mongodb.png')) }}); background-position: center; background-size: 50%;">
+                                </div>
                             </div>
                         </div>
+                        <div class="d-flex flex-column">
+                            <span style="font-size: 16px;font-weight: bold">{{$db->servicename}}</span>
+                                <form action="/dbrequest/cancelrequestready/{{$db->servicename}}" method="POST">
+                                    <input type="hidden" name="_method" value="PUT" />
+                                    <button class="cancel-button btn btn-outline-danger py-1 px-2" type="submit">Cancel</button>
+                                </form>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column">
-                        <span style="font-size: 16px;font-weight: bold">{{$db->servicename}}</span>
-                            <form action="/dbrequest/cancelrequestready/{{$db->servicename}}" method="POST">
-                                <input type="hidden" name="_method" value="PUT" />
-                                <button class="cancel-button btn btn-outline-danger py-1 px-2" type="submit">Cancel</button>
-                            </form>
-                    </div>
-                </div>
 
-            @endif
-            @endforeach
+                @endif
+                @endforeach
+
+
+
        </div>
 
+       @if($counter == 0)
+             <div  style="width: 100%; text-align: center;">There's no ready request.</div>
+        @endif
       </div>
 
 
@@ -208,8 +247,14 @@
                                 <div style="height: 1px; width: 100%; background-color: lightgrey">
                                 </div>
                             </div>
+                @php
+                    $counter = 0;
+                @endphp
                 @foreach($dbs as $db)
-                @if($db->requestedvip == null || $db->requestedvip == "" || $db->vmstatus == false)
+                @if(($db->engine == "Postgres" && ($db->requestedvip == null || $db->vmstatus == false)) || ($db->engine == "Mongo" &&  $db->vmstatus == false))
+                    @php
+                        $counter++;
+                    @endphp
                 <div class="request-card content-box shadow-sm" >
                     <div class="request-card-header">
                         <div class="profile d-flex flex-row">
@@ -222,17 +267,16 @@
 
                             <form action="/dbrequest/{{$db->servicename}}/edit" method="GET" >
 
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <button type="submit" class="btn btn-outline-primary" style="width: 100%;" data-toggle="popover" data-content="Edit">
                                     <i class="fa fa-edit"></i>
                                 </button>
                         </form>
 
-                            <form action="/dbrequest/{{$db->servicename}}" method="POST" >
-                                    <input type="hidden" name="_method" value="DELETE" />
-                                    <button type="submit" class="btn btn-danger" style="width: 100%;">
+                            <div style="display:inline-block" data-toggle="popover" data-content="Delete">
+                                    <button type="button"  class="btn btn-outline-danger" data-toggle="modal" data-target="#modalDelete" onclick="changePopUp('{{$db->servicename}}')" style="width: 100%;">
                                             <i class="fa fa-trash"></i>
                                     </button>
-                                </form>
+                            </div>
 
                           </div>
 
@@ -359,12 +403,13 @@
                     </div>
                     <div class="request-card-footer" style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 15px;">
                         <div class="py-auto">
-                                <form action="/dbrequest/updatevip/{{$db->servicename}}" method="POST">
+                            @if($db->engine === 'Postgres')
+                                <form action="/dbrequest/updatevip/{{$db->servicename}}" method="POST" \>
                                     @csrf
                             <div class="input-group" style="margin-top: 6.75px;">
 
 
-                                    <input type="text" name="virtualip" class="form-control my-auto" id="" value="{{$db->requestedvip}}" required placeholder="Virtual IP">
+                                    <input type="text" name="requestedvip" class="form-control my-auto" id="" value="{{$db->requestedvip}}" required placeholder="Virtual IP">
                                     <input type="hidden" name="_method" value="PUT" />
                                         <div class="input-group-append">
                                             @if($db->requestedvip == "")
@@ -376,7 +421,9 @@
                                         </div>
                             </div>
                              </form>
+                             @endif
                         </div>
+
                         <form action="/dbrequest/updatevmstatus/{{$db->servicename}}" method="POST" style="display: grid; align-items: center">
                             <input type="hidden" name="_method" value="PUT" />
                             @csrf
@@ -397,16 +444,17 @@
                   </div>
                   @endif
                 @endforeach
-
+                @if($counter == 0)
+                    <span class="mx-auto">There's no active request.</span>
+                @endif
             </div>
 <script>
 
 
-    window.onload = function(){
-
-        $('#firstDiskName').val('/');
-        $('#firstDiskSize').val('20');
-
+function changePopUp(a){
+    $('#servicetext').text(a);
+    $('#deleteForm').prop('action', '/dbrequest/' + a);
+}
 
 
 
@@ -460,7 +508,7 @@
 
 
 
-    }
+
 
 </script>
 

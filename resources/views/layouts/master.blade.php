@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Database Manager</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 
@@ -80,6 +80,14 @@ a:hover {
     background-color: #34495e;
 }
 
+#no-hover:hover {
+    border-right: none;
+    font-weight: normal;
+    color: #ecf0f1;
+    background-color: #2c3e50;
+    cursor: default;
+}
+
 .content{
         background-color: white;
         border-radius: 5px;
@@ -123,7 +131,7 @@ a:hover {
       <i class="fa fa-database" style="{{ (request()->is('/dbrequest/installed')) ? 'color: white;font-weight: 600' : '' }}"></i>
       <span style="{{ (request()->is('/dbrequest/installed')) ? 'color: white;font-weight: 600' : '' }}">Instances</span>
   </a>
-  <a>
+  <a id="no-hover">
     <i class="fa fa-plus" style="{{ (request()->is('db/create')) ? 'color: white;font-weight: 600' : '' }}"></i>
     <span style="{{ (request()->is('db/create')) ? 'color: white;font-weight: 600' : '' }}">Create</span>
 
@@ -156,9 +164,12 @@ a:hover {
 </div>
 
 <!-- Use any element to open the sidenav -->
-<button type="button" class="btn btn-dark m-3" onclick="openNav()" style="z-index:3;position: fixed; border: solid 1px lightgrey">
-    <div class="fas fa-tasks"></div>
-</button>
+<div class="py-4" style="z-index:3;position: fixed; margin-left: 100px;">
+    <button type="button" class="btn btn-light my-3 shadow-sm" onclick="openNav()" style="background-color: white; height: 50px; width: 50px;">
+        <div class="fas fa-tasks fa" style="font-size: 20px;"></div>
+    </button>
+</div>
+
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 
@@ -177,12 +188,21 @@ a:hover {
 
 <script type="text/javascript">
 
+$(function () {
+  $('[data-toggle="popover"]').popover({
+  trigger: 'hover',
+  placement: 'top',
+  delay: { "show": 500, "hide": 200 },
+  template: '<div style="font-size: 16px;" class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>'
+})
+})
+
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("app").style.paddingLeft = "250px";
-  document.getElementById("app-content").style.paddingLeft = "60px";
-  document.getElementById("app-content").style.paddingRight = "60px";
+  document.getElementById("app-content").style.paddingLeft = "100px";
+  document.getElementById("app-content").style.paddingRight = "100px";
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */

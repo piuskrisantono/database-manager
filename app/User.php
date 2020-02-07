@@ -32,6 +32,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -46,9 +47,6 @@ class User extends Authenticatable
         return null !== $this->roles()->where('rolname', $role)->first();
     }
 
-
-
-
     public function roles()
     {
         return $this->belongsTo('App\Role', 'role_id');
@@ -62,6 +60,6 @@ class User extends Authenticatable
 
     public function histories()
     {
-        return $this->hasMany('App\History');
+        return $this->hasMany('App\History', 'username', 'actor');
     }
 }

@@ -179,7 +179,7 @@
 
                               <div class="d-flex flex-row justify-content-center pt-4" id="box-button">
                                 <div class="d-flex flex-row-reverse " style="width: 100%;">
-                                    <button class="btn btn-lg btn-primary border shadow-sm" type="submit" name="deploy">Install</button>
+                                    <button class="btn btn-lg btn-primary border shadow-sm" type="submit" id="install-button" name="deploy">Install</button>
                                     <button onclick="goBack()" type="button" href="#carouselExampleControls" class="btn btn-lg btn-light mx-2 border shadow-sm" data-slide="prev">Back</button>
                                 </div>
                               </div>
@@ -257,7 +257,10 @@
 
                 listBefore.appendChild(this.itemBox);
 
-                this.aButton.addEventListener('click', () => this.add(this.itemBox, itemName));
+                this.aButton.addEventListener('click', () => {
+                    this.add(this.itemBox, itemName);
+                    $('#install-button').prop('disabled', false);
+                });
 
             }
 
@@ -286,7 +289,12 @@
 
                 listAfter.appendChild(this.itemBox);
 
-                this.aButton.addEventListener('click', () => this.remove(this.itemBox, itemName));
+                this.aButton.addEventListener('click', () => {
+                    this.remove(this.itemBox, itemName);
+                    if(!listAfter.firstChild) $('#install-button').prop('disabled', true);
+
+
+                });
             }
 
             remove(itemBox, itemName){
@@ -303,6 +311,7 @@
             while (listBefore.firstChild) {
                 listBefore.removeChild(listBefore.firstChild);
             }
+            $('#install-button').prop('disabled', true);
 
         }
 

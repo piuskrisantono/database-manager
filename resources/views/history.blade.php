@@ -10,7 +10,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">History Details</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -44,11 +44,15 @@
 
                                     <tr>
                                         <td style="width: 150px;">{{$history->created_at}}</td>
-                                        <td style="width: 50px"><div  style="height: 30px; width:30px; border-radius: 4vw;background-repeat: no-repeat; display: inline-block; background-image: url({{ asset('img/avatar/'.$history->user->avatar.'.png') }}); background-position: center; background-size: 100%; border: 2px solid lightgrey; background-color:#ecf0f1;"></div></td>
-                                        <td><b>{{$history->user->username}}</b> {{$history->activity}} {{$history->object}}</b></td>
-                                        <td>
+                                        @if($history->user)
+                                            <td style="width: 50px"><div  style="height: 30px; width:30px; border-radius: 4vw;background-repeat: no-repeat; display: inline-block; background-image: url({{ asset('img/avatar/'.$history->user->avatar.'.png') }}); background-position: center; background-size: 100%; border: 2px solid lightgrey; background-color:#ecf0f1;"></div></td>
+                                        @else
+                                        <td style="width: 50px"><div  style="height: 30px; width:30px; border-radius: 4vw;background-repeat: no-repeat; display: inline-block; background-image: url({{ asset('img/avatar/5.png') }}); background-position: center; background-size: 100%; border: 2px solid lightgrey; background-color:#ecf0f1;"></div></td>
+                                        @endif
+                                        <td><b>{{$history->actor}}</b> {{$history->activity}} {{$history->object}}</b></td>
+                                        <td class="p-0">
                                         @if($history->description != "")
-                                        <button class="btn btn-primary float-right" onclick="changePopup('{{$history->description}}')" data-toggle="modal" data-target="#exampleModalCenter">Details</button>
+                                        <button class=" btn btn-primary float-right" onclick="changePopup('{{$history->description}}')" data-toggle="modal" data-target="#exampleModalCenter">Details</button>
                                         @endif
                                         </td>
                                     </tr>

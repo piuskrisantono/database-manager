@@ -1,30 +1,12 @@
 @extends('layouts.master')
 
+
 @section('content')
 
 
-<?php
-// $ch = curl_init();
 
-// curl_setopt($ch, CURLOPT_URL, 'http://172.22.252.137:9100/metrics');
 
-// // curl_setopt($ch, CURL_RETURNTRANSFER, 1);
-
-// // curl_setopt($ch, CURL_OPT_HEADER, 0);
-
-// $output = curl_exec($ch);
-
-// if($output === FALSE){
-//     echo "cURL Error" . curl_error($ch);
-// }
-
-// curl_close($ch);
-
-// print_r($output);
-
-?>
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+{{-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
         <form action="" class="form-update" method="POST">
@@ -183,7 +165,7 @@
 
     </div>
   </div>
-</div>
+</div> --}}
 
 
 
@@ -240,7 +222,33 @@
     </div>
   </div>
 
+  <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="modalDelete" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Delete Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
+
+        <div class="modal-body">
+            Are you sure you want to delete <b id="servicetext"></b>?
+        </div>
+
+        <form action="" method="POST" id="deleteForm">
+            <input type="hidden" name="_method" value="DELETE" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger" type="submit">Delete</button>
+            </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
 
 
 
@@ -254,9 +262,9 @@
 
 
                 <form class="form-inline my-auto">
-                    <button href="" class="btn btn-primary mx-2" type="button">Add Existing DB</button>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search DB" aria-label="Search">
-                    <button class="btn btn-primary my-2 my-sm-0" type="submit" style="border-radius:50%"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <a href="/adddatabase" class="btn btn-primary" type="button">Add Existing DB</a>
+                    {{-- <input class="form-control mr-sm-2" type="search" placeholder="Search DB" aria-label="Search">
+                    <button class="btn btn-primary my-2 my-sm-0" type="submit" style="border-radius:50%"><i class="fa fa-search" aria-hidden="true"></i></button> --}}
                 </form>
 
 
@@ -274,43 +282,49 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @isset($dbs)
+                                @php
+                                    $counter = 0;
+                                @endphp
                               @foreach($dbs as $db)
+                                @php
+                                    $counter++;
+                                @endphp
                                   <tr>
                                       <td>{{$db->servicename}}</td>
                                       <td>{{$db->engine}}</td>
                                       <td>{{$db->requestedvip}}</td>
-                                  <td style="color: {{($db->installed == 'Installed') ? '#2ecc71' : '#3498db'}};">{{$db->installed}}</td>
+                                  <td style="font-weight: bold;color: {{($db->installed == 'Installed') ?  '#2ecc71' : '#3498db' }};">{{$db->installed}}</td>
                                       <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"data-target="#exampleModalCenter">
-                                          <i class="fa fa-edit" onclick="changePopup(
-                                        '{{$db->servicename}}',
-                                        '{{$db->dbengine}}',
-                                        '{{$db->hostname}}',
-                                        '{{$db->superusername}}',
-                                        '{{$db->superuserpassword}}',
-                                        '{{$db->replica}}',
-                                        '{{$db->replicausername}}',
-                                        '{{$db->replicauserpassword}}',
-                                        // '{{$db->backrestrepo}}',
-                                        '',
-                                        '{{$db->pgpoolmaster}}',
-                                        '{{$db->pgpoolslave}}'
-                                         )" style="cursor: pointer;"></i>
-                                        </button>
+                                        <a type="button" class="btn btn-outline-primary" href="/updateInstalled/{{$db->servicename}}"  data-toggle="popover" data-content="Edit">
+                                             <i class="fa fa-edit"></i>
+                                        </a>
+                                        <div style="display:inline-block" data-toggle="popover" data-content="Configure">
+                                            <button type="button" onclick="popupLogin('{{$db->servicename}}')" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#modallogin" >
+                                                <i class="fa fa-cog "></i>
+                                            </button>
+                                        </div>
 
-                                    <button type="button" onclick="popupLogin('{{$db->servicename}}')" class="btn btn btn-warning" data-toggle="modal" data-target="#modallogin">
-                                        <i class="fa fa-cog " style="color:white;"></i>
-                                    </button>
+
+                                        <a type="button" class="btn btn-outline-primary" href="/monitor/{{$db->servicename}}" data-toggle="popover" data-content="Monitor">
+                                            <i class="fa fa-signal"></i>
+                                       </a>
+
+
+
+                                       <div style="display:inline-block" data-toggle="popover" data-content="Delete">
+                                            <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalDelete" onclick="changePopUp('{{$db->servicename}}')" data-toggle="popover" data-content="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                            </button>
+                                       </div>
                                       {{-- <a href="/dbrequest/installed/{{$db->servicename}}"></a> --}}
                                     </td>
 
                                   </tr>
                               @endforeach
-                            @endisset
-                            @empty($dbs)
-                              <tr><td colspan=4 style="text-align: center;">There is no database created, yet.</td></tr>
-                            @endempty
+                              @if($counter == 0)
+                              <td colspan="5" style="text-align:center;">There's still no database installed.</td>
+                                @endif
+
                         </tbody>
                       </table>
         </div>
@@ -429,7 +443,10 @@ $(document).ready(function(){
 
 });
 
-
+function changePopUp(a){
+    $('#servicetext').text(a);
+    $('#deleteForm').prop('action', '/dbrequest/' + a);
+}
 
 
 

@@ -20,16 +20,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -37,7 +27,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->username = $request->name;
+        $user->avatar = $request->avatar;
+        $user->role_id = $request->role;
+        $user->save();
+
+        return redirect('/user')->with('success', 'User Successfully Added');
     }
 
 
