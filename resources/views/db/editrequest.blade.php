@@ -148,22 +148,22 @@
                                     @php($disks = explode(', ',$dbrequest->requesteddisk))
                                     <tr id="firstDisk">
                                         <td><input id="firstDiskName" readonly type="text" class="form-control" name="requestedDiskName[]" value="/"></td>
-                                        <td><input id="firstDiskSize" type="text" class="form-control" name="requestedDiskSize[]" value="{{$disks[0]}}"></td>
+                                        <td><input id="firstDiskSize" class="form-control" name="requestedDiskSize[]" value="{{$disks[0]}}"  type="number" step="5"></td>
 
                                     </tr>
                                     <tr id="secondDisk" style="display: none;">
                                         <td><input id="secondDiskName" readonly type="text" class="form-control" name="requestedDiskName[]"></td>
-                                        <td><input id="secondDiskSize" type="text" class="form-control" name="requestedDiskSize[]" value="{{$disks[1]}}"></td>
+                                        <td><input id="secondDiskSize" class="form-control" name="requestedDiskSize[]" value="{{$disks[1]}}"  type="number" step="5" ></td>
 
                                     </tr>
                                     <tr id="thirdDisk" style="display: none;">
                                         <td><input id="thirdDiskName" readonly type="text" class="form-control" name="requestedDiskName[]"></td>
-                                        <td><input id="thirdDiskSize" type="text" class="form-control" name="requestedDiskSize[]" value="{{$disks[2]}}"></td>
+                                        <td><input id="thirdDiskSize"  class="form-control" name="requestedDiskSize[]" value="{{$disks[2]}}"  type="number" step="5" ></td>
 
                                     </tr>
                                     <tr id="fourthDisk" style="display: none;">
                                         <td><input id="fourthDiskName" readonly type="text" class="form-control" name="requestedDiskName[]"></td>
-                                        <td><input id="fourthDiskSize" type="text" class="form-control" name="requestedDiskSize[]"
+                                        <td><input id="fourthDiskSize" class="form-control" name="requestedDiskSize[]"  type="number" step="5" 
                                         @if($dbrequest->engine == "Postgres")
                                             value="{{$disks[3]}}"
                                         @endif

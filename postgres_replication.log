@@ -1,0 +1,1471 @@
+
+PLAY [all] *********************************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+
+
+PLAY [all] *********************************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+
+
+PLAY [all] *********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************
+fatal: [postgrestestdb-02.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+fatal: [postgrestestdb-01.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '[postgrestestdb-01.infra-wallet.lokal]:2209,[172.22.127.3]:2209' (ECDSA) to the list of known hosts.\r\nPermission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+
+PLAY RECAP *********************************************************************************************************************************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581237628.59-32237507123623/pgdg-centos11-11-2.noarchAWW_6o.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581237628.59-32237507123623/pgdg-centos11-11-2.noarchAWW_6o.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581237628.8-266718956731675/pgdg-centos11-11-2.noarchGYIS7E.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581237628.8-266718956731675/pgdg-centos11-11-2.noarchGYIS7E.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581301968.66-256289378413676/pgdg-centos11-11-2.noarchFBnpQN.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581301968.66-256289378413676/pgdg-centos11-11-2.noarchFBnpQN.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581301968.85-276262516183519/pgdg-centos11-11-2.noarchG7kP6w.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581301968.85-276262516183519/pgdg-centos11-11-2.noarchG7kP6w.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581302784.33-71049383853218/pgdg-centos11-11-2.noarchhJsB3H.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581302784.33-71049383853218/pgdg-centos11-11-2.noarchhJsB3H.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581302784.52-84671957367483/pgdg-centos11-11-2.noarchMBupOG.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581302784.52-84671957367483/pgdg-centos11-11-2.noarchMBupOG.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581317874.28-47666702340751/pgdg-centos11-11-2.noarchF4wTdU.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581317874.28-47666702340751/pgdg-centos11-11-2.noarchF4wTdU.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581317874.08-114949752023423/pgdg-centos11-11-2.noarchO4lIr5.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581317874.08-114949752023423/pgdg-centos11-11-2.noarchO4lIr5.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581318312.27-35757487382642/pgdg-centos11-11-2.noarchUwVTmh.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581318312.27-35757487382642/pgdg-centos11-11-2.noarchUwVTmh.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581318312.09-75946626785678/pgdg-centos11-11-2.noarch5fHTkQ.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581318312.09-75946626785678/pgdg-centos11-11-2.noarch5fHTkQ.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": true, "cmd": ["/usr/pgsql-11/bin/initdb", "-E", "UTF-8", "-D", "/db/11/data/"], "delta": "0:00:00.034037", "end": "2020-02-10 14:08:31.559757", "msg": "non-zero return code", "rc": 1, "start": "2020-02-10 14:08:31.525720", "stderr": "initdb: directory \"/db/11/data\" exists but is not empty\nIf you want to create a new database system, either remove or empty\nthe directory \"/db/11/data\" or run initdb\nwith an argument other than \"/db/11/data\".", "stderr_lines": ["initdb: directory \"/db/11/data\" exists but is not empty", "If you want to create a new database system, either remove or empty", "the directory \"/db/11/data\" or run initdb", "with an argument other than \"/db/11/data\"."], "stdout": "The files belonging to this database system will be owned by user \"postgres\".\nThis user must also own the server process.\n\nThe database cluster will be initialized with locale \"en_US.UTF-8\".\nThe default text search configuration will be set to \"english\".\n\nData page checksums are disabled.", "stdout_lines": ["The files belonging to this database system will be owned by user \"postgres\".", "This user must also own the server process.", "", "The database cluster will be initialized with locale \"en_US.UTF-8\".", "The default text search configuration will be set to \"english\".", "", "Data page checksums are disabled."]}
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": true, "cmd": ["/usr/pgsql-11/bin/pg_basebackup", "-h", "172.22.127.3", "-U", "replica", "-D", "/db/11/data", "-X", "stream", "-P", "-R", "-w", "-S", "replica"], "delta": "0:00:00.030286", "end": "2020-02-10 14:08:34.406698", "msg": "non-zero return code", "rc": 1, "start": "2020-02-10 14:08:34.376412", "stderr": "pg_basebackup: directory \"/db/11/data\" exists but is not empty", "stderr_lines": ["pg_basebackup: directory \"/db/11/data\" exists but is not empty"], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=10   changed=3    unreachable=0    failed=1    skipped=1    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=9    unreachable=0    failed=0    skipped=10   rescued=0    ignored=2   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581322640.45-156763777543966/pgdg-centos11-11-2.noarchUvAUv1.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581322640.45-156763777543966/pgdg-centos11-11-2.noarchUvAUv1.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581322640.66-47000461712318/pgdg-centos11-11-2.noarchaSTlty.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581322640.66-47000461712318/pgdg-centos11-11-2.noarchaSTlty.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581323525.37-155137732772373/pgdg-centos11-11-2.noarchJauhPO.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581323525.37-155137732772373/pgdg-centos11-11-2.noarchJauhPO.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581323525.14-10099542577492/pgdg-centos11-11-2.noarch5qT9JQ.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581323525.14-10099542577492/pgdg-centos11-11-2.noarch5qT9JQ.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581326036.3-161338802156280/pgdg-centos11-11-2.noarchU055Md.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581326036.3-161338802156280/pgdg-centos11-11-2.noarchU055Md.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581326036.1-37962201641794/pgdg-centos11-11-2.noarchtgtmMl.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581326036.1-37962201641794/pgdg-centos11-11-2.noarchtgtmMl.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding Repository] ***
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581326550.07-82370368123319/pgdg-centos11-11-2.noarch8f7Yrl.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581326550.07-82370368123319/pgdg-centos11-11-2.noarch8f7Yrl.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "changes": {"installed": ["/opt/ansible/.ansible/tmp/ansible-tmp-1581326549.86-135167548122978/pgdg-centos11-11-2.noarchflzuiL.rpm"]}, "msg": "Cannot install package pgdg-centos11-11-2.noarch. It is obsoleted by installed package pgdg-redhat-repo-42.0-6.noarch\nError: Nothing to do\n", "rc": 1, "results": ["Loaded plugins: fastestmirror\nExamining /opt/ansible/.ansible/tmp/ansible-tmp-1581326549.86-135167548122978/pgdg-centos11-11-2.noarchflzuiL.rpm: pgdg-centos11-11-2.noarch\n"]}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Installing PostgreSQL11] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Make correct folder structure for the data directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db/11/data/)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log/pglog)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log/pg_wals)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=~/backup_scripts)
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=~/backup_scripts)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing Ownership of PostgreSQL Files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/db)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/archive_log)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=/pg_log)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=/pg_log)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting Firewalld] ***
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding PostgreSQL Service to Firewall] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--add-service=postgresql --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=--reload)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Configuring service file variables] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Reloading daemon] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Initializing Database] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Sending conf and user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'postgresql.conf.j2', u'/db/11/data/postgresql.conf'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'user_creation.sql.j2', u'/tmp/user_creation.sql'])
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : generating password for user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgresql to create user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating default users] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Removing user creation sql file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Get password file] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : copy pg_hba.conf template] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Restarting postgresql to apply hba] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Base Backing Up Data from Master] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Deleting Backup Label] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Ensuring Ownership and Mode for PostgreSQL Files] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Start postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Replicate the log archive script for logrotate and log archiving] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Adding the script to the crontab of root] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Creating exporter directory if it doesn't exists] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Download exporter file] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Unarchive exporter] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the service file] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Place the queries file] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Changing ownership of exporter folder] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Starting postgres_exporter] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/postgres-replication : Clean up the exporter files] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=29   changed=18   unreachable=0    failed=0    skipped=6    rescued=0    ignored=1   
+postgrestestdb-02.infra-wallet.lokal : ok=25   changed=12   unreachable=0    failed=0    skipped=10   rescued=0    ignored=1   
+

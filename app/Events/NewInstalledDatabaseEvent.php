@@ -21,10 +21,16 @@ class NewInstalledDatabaseEvent
      */
 
     public $dbrequestservicename;
+    public $engine;
+    public $virtualip;
 
-    public function __construct($dbarray)
+    public function __construct($dbarray, $engine, $virtualip)
     {
         $this->dbrequestservicename = $dbarray;
+	$this->engine = $engine;
+	if (strpos($engine, 'PostgreSQL') !== false) {
+	    $this->virtualip = $virtualip;
+	}
     }
 
     /**

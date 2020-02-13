@@ -1,0 +1,619 @@
+
+PLAY [all] *********************************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+
+
+PLAY [all] *********************************************************************
+skipping: no hosts matched
+
+PLAY RECAP *********************************************************************
+
+
+PLAY [all] *********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************
+fatal: [postgrestestdb-01.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+fatal: [postgrestestdb-02.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+
+PLAY RECAP *********************************************************************************************************************************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] *********************************************************************************************************************************************************************
+fatal: [postgrestestdb-01.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+fatal: [postgrestestdb-02.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+fatal: [postgrestestpgbouncer-01.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Host key verification failed.", "unreachable": true}
+fatal: [postgrestestpgbouncer-02.infra-wallet.lokal]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '[postgrestestpgbouncer-02.infra-wallet.lokal]:2209,[172.22.127.6]:2209' (ECDSA) to the list of known hosts.\r\nPermission denied (publickey,gssapi-keyex,gssapi-with-mic,password,keyboard-interactive).", "unreachable": true}
+
+PLAY RECAP *********************************************************************************************************************************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+postgrestestpgbouncer-01.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+postgrestestpgbouncer-02.infra-wallet.lokal : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+fatal: [postgrestestdb-01.infra-wallet.lokal]: FAILED! => {"msg": "A vault password or secret must be specified to decrypt /var/www/database-manager/storage/app/postgres/pgbackrest/files/id_rsa"}
+fatal: [postgrestestdb-02.infra-wallet.lokal]: FAILED! => {"msg": "A vault password or secret must be specified to decrypt /var/www/database-manager/storage/app/postgres/pgbackrest/files/id_rsa"}
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=3    changed=1    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Backup Dir] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Modifying archive command] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Changing owner of pgbackrest dirs] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/var/log/pgbackrest) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/tmp/pgbackrest) 
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/var/log/pgbackrest)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/tmp/pgbackrest)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Initializing pgBackRest Stanza] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Performing Initial Backup] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making backup_script Directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing backup script for postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600']) 
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for full backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for differential backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=11   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=9    changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Backup Dir] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Modifying archive command] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Changing owner of pgbackrest dirs] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/var/log/pgbackrest) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/tmp/pgbackrest) 
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/var/log/pgbackrest)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/tmp/pgbackrest)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Initializing pgBackRest Stanza] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Performing Initial Backup] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making backup_script Directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing backup script for postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600']) 
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for full backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for differential backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=11   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=9    changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Backup Dir] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Modifying archive command] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Changing owner of pgbackrest dirs] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/var/log/pgbackrest) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/tmp/pgbackrest) 
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/var/log/pgbackrest)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/tmp/pgbackrest)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Initializing pgBackRest Stanza] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Performing Initial Backup] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making backup_script Directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing backup script for postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600']) 
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for full backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for differential backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=11   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=9    changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Backup Dir] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Modifying archive command] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Changing owner of pgbackrest dirs] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/var/log/pgbackrest) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/tmp/pgbackrest) 
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/var/log/pgbackrest)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/tmp/pgbackrest)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Initializing pgBackRest Stanza] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Performing Initial Backup] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making backup_script Directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing backup script for postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600']) 
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for full backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for differential backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=11   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=9    changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Backup Dir] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Modifying archive command] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Changing owner of pgbackrest dirs] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/var/log/pgbackrest) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/tmp/pgbackrest) 
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/var/log/pgbackrest)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/tmp/pgbackrest)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Initializing pgBackRest Stanza] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Performing Initial Backup] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making backup_script Directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing backup script for postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600']) 
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for full backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for differential backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=11   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=9    changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Installing pgbackrest] ***
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing ssh for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Backup Dir] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Modifying archive command] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Changing owner of pgbackrest dirs] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/var/log/pgbackrest) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=/tmp/pgbackrest) 
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/var/log/pgbackrest)
+ok: [postgrestestdb-01.infra-wallet.lokal] => (item=/tmp/pgbackrest)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Initializing pgBackRest Stanza] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Performing Initial Backup] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Copying pgbackrest.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Making backup_script Directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Sharing backup script for postgres] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600']) 
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-diff.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'backup-full.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'dba-sa.json', u'0600'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'diff-decrypt22.sh', u'0755'])
+ok: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'encrypt22.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keydecrypt.json', u'0600'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'2207keymaker.json', u'0600'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for full backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgbackrest : Creating Crontab for differential backup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=11   changed=7    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=9    changed=4    unreachable=0    failed=0    skipped=7    rescued=0    ignored=0   
+

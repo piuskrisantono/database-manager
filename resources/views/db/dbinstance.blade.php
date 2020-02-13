@@ -184,9 +184,9 @@
         </div>
 
 
-        <form action="/dbrequest/installed/authdb" method="POST">
+        <form action="/dbrequest/installed/authdb" method="GET">
         <div class="modal-body">
-
+		<input type="hidden" name="engine" id="engineauth">
             <input type="hidden" name="hostname" id="hostnameauth">
 
             <div class="form-group row">
@@ -299,13 +299,13 @@
                                              <i class="fa fa-edit"></i>
                                         </a>
                                         <div style="display:inline-block" data-toggle="popover" data-content="Configure">
-                                            <button type="button" onclick="popupLogin('{{$db->servicename}}')" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#modallogin" >
+                                            <button type="button" onclick="popupLogin('{{$db->servicename}}', '{{$db->engine}}')" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#modallogin" >
                                                 <i class="fa fa-cog "></i>
                                             </button>
                                         </div>
 
 
-                                        <a type="button" class="btn btn-outline-primary" href="/monitor/{{$db->servicename}}" data-toggle="popover" data-content="Monitor">
+                                        <a type="button" class="btn btn-outline-primary" href="/dbrequest/installed/{{$db->servicename}}/monitoring" data-toggle="popover" data-content="Monitor">
                                             <i class="fa fa-signal"></i>
                                        </a>
 
@@ -384,9 +384,10 @@
       $('#pgpoolslave').prop("disabled", true);
     }
 
-    function popupLogin(a){
+    function popupLogin(a, b){
         $('#exampleModalLongTitle').text('Authenticate to ' + a);
         $('#hostnameauth').val(a);
+	$('#engineauth').val(b);
     }
 
     function changePopup(a,b,c,d,e,f,g,h,i,j,k) {

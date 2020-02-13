@@ -79,7 +79,7 @@ class DbrequestController extends Controller
         $db->engine = $request->requestType;
         $db->requestedcpu = $request->requestCpu;
         $db->requestedmemory = $request->requestMemory;
-        $db->requestedDisk = $requestedDisk;
+        $db->requesteddisk = $requestedDisk;
         $db->vmstatus = false;
         $db->requestedvip = "";
         $db->installed = "";
@@ -148,7 +148,7 @@ class DbrequestController extends Controller
         $db->engine = $request->requestType;
         $db->requestedcpu = $request->requestCpu;
         $db->requestedmemory = $request->requestMemory;
-        $db->requestedDisk = $requestedDisk;
+        $db->requesteddisk = $requestedDisk;
         $db->vmstatus = false;
         $db->requestedvip = "";
         $db->installed = "";
@@ -286,6 +286,7 @@ class DbrequestController extends Controller
         $dbrequest->update(['engine' => $engine]);
 
         $dbrequestservicename = $dbrequest->pluck('servicename')->toArray();
+	$dbrequestvip = $dbrequest->pluck('requestedvip')->toArray();
 
 
         foreach ($dbrequestservicename as $dbservicename) {
@@ -293,7 +294,7 @@ class DbrequestController extends Controller
             HistoryController::store(Auth::user()->username, "installed database for service", $dbservicename, "");
         }
 
-        event(new NewInstalledDatabaseEvent($dbrequestservicename));
+        event(new NewInstalledDatabaseEvent($dbrequestservicename, $engine, $dbrequestvip));
 
 
         return redirect('/')->with('success', 'Successfully Installed DB');
@@ -302,7 +303,7 @@ class DbrequestController extends Controller
     public function getInstalled()
     {
         //
-        $dbs = Dbrequest::whereIn('installed', array("Installed", "On Progress"))->paginate(8);
+        $dbs = Dbrequest::whereIn('installed', array("Installed", "On Progress", "Failed"))->paginate(8);
 
         return view('db.dbinstance', ['dbs' => $dbs]);
     }
@@ -331,7 +332,7 @@ class DbrequestController extends Controller
         $db->engine = $request->version;
         $db->requestedcpu = 999;
         $db->requestedmemory = 999;
-        $db->requestedDisk = "";
+        $db->requesteddisk = "";
         $db->vmstatus = true;
         $db->requestedvip = $request->requestedvip;
         $db->installed = "Installed";
@@ -387,7 +388,7 @@ class DbrequestController extends Controller
         $db->requestedby = Auth::user()->id;
         $db->requestedcpu = 999;
         $db->requestedmemory = 999;
-        $db->requestedDisk = "";
+        $db->requesteddisk = "";
         $db->vmstatus = true;
         $db->installed = "Installed";
         $db->save();
@@ -401,7 +402,7 @@ class DbrequestController extends Controller
 
     public function authDb(Request $request)
     {
-        $conn = pg_connect("host=" . $request->hostname . " port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
+        $conn = pg_connect("host=" . $request->hostname . "db-01.infra-wallet.lokal port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
 
         $config = pg_query($conn, "select  name, setting, unit, short_desc, extra_desc, context, pending_restart from pg_settings where context != 'internal' and context !='backend' order by category;");
 
@@ -411,37 +412,30 @@ class DbrequestController extends Controller
 
     public function modifyConfig(Request $request)
     {
-        $conn = pg_connect("host=" . $request->hostname . " port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
+        $conn = pg_connect("host=" . $request->hostname . "db-01.infra-wallet.lokal port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
 
         $changed_configuration = "Changed ";
 
 
         for ($i = 0; $i < sizeof($request->changedconfigvalue); $i++) {
-            $conn = pg_connect("host=" . $request->hostname . " port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
+            $conn = pg_connect("host=" . $request->hostname . "db-01.infra-wallet.lokal port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
             pg_query($conn, "ALTER SYSTEM SET " . $request->changedconfigname[$i] . "='" . $request->changedconfigvalue[$i] . "'");
 
-            $changed_configuration = $changed_configuration .  $request->changedconfigname[$i] . " become " .  $request->changedconfigvalue[$i] . ",";
+            $changed_configuration .= $changed_configuration .  $request->changedconfigname[$i] . " become " .  $request->changedconfigvalue[$i] . ",";
         }
 
         $changed_configuration = substr($changed_configuration, 0, strlen($changed_configuration) - 2);
 
-        HistoryController::store(Auth::user()->username, "installed database for service", $request->hostname, $changed_configuration);
+        HistoryController::store(Auth::user()->username, "changed database configuration for service", $request->hostname, $changed_configuration);
 
         if ($request->counterRestart != '0') {
-
-            $a = popen('"C:\Program Files\PostgreSQL\11\bin\pg_ctl" -D "C:\Program Files\PostgreSQL\11\data" restart', 'r');
-
-            while ($b = fgets($a, 2048)) {
-                if (strpos($b, 'server started') !== false) {
-                    pclose($a);
-                    break;
-                }
-            }
+#		dd("ssh -p 2209 ansible@" . $request->hostname  . "db-01.infra-wallet.lokal sudo systemctl restart postgresql-11");
+		exec("sudo -u ansible ssh -p 2209 ansible@" . $request->hostname  . "db-01.infra-wallet.lokal sudo systemctl restart postgresql-1" . substr($request->engine, 12,12));
+		return redirect('/')->with('success', 'Successfully Changed Configuration');
         } else {
             pg_query($conn, "select * from pg_reload_conf();");
             pg_query($conn, "select pg_sleep(3)");
+	    return Redirect::back()->with('success', 'Successfully Changed Configuration');
         }
-
-        return redirect('/');
     }
 }

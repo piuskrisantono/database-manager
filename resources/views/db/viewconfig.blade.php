@@ -65,6 +65,7 @@
         <input type="hidden" name="username" value="{{$dbcredentials->username}}">
         <input type="hidden" name="password" value="{{$dbcredentials->password}}">
         <input type="hidden" name="hostname" value="{{$dbcredentials->hostname}}">
+	<input type="hidden" name="engine" value="{{$dbcredentials->engine}}">
 
         <div class="content-box p-auto shadow-sm mx-3">
 

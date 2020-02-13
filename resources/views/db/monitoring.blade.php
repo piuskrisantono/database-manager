@@ -72,7 +72,7 @@
 
         <div class="d-flex justify-content-between mx-3 px-3 shadow-sm py-0 content-box" style="background-color: white; height: 50px; margin-bottom: 10px;">
                 <div class="title-tab my-auto" style="font-size: 20px; overflow:hidden">
-                    Performance Monitor of service-satu
+                    Performance Monitor of {{$servicename}}
                 </div>
         </div>
 

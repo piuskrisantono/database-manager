@@ -367,12 +367,12 @@
     // }
 
     function showAddUser(){
-        $('#new-picture').css("background-image", 'url(http://127.0.0.1:8000/img/avatar/1.png)');
+        $('#new-picture').css("background-image", "asset('/img/avatar/1.png')");
         $('#name').value("");
     }
 
     function changePopup(a,b,c,d) {
-        $('.form-update').attr('action' , 'http://127.0.0.1:8000/user/'+a);
+        $('.form-update').attr('action' , '/user/'+a);
 
         changePicture(d);
 

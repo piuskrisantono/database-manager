@@ -22,8 +22,8 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::put('/dbrequest/updatevip/{servicename}', 'DbrequestController@updateVip');
 Route::put('/dbrequest/updatevmstatus/{servicename}', 'DbrequestController@updateVmStatus');
 Route::get('/dbrequest', 'DbrequestController@index');
-Route::get('/dbrequest/installed/monitor', function () {
-    return view('db.monitoring');
+Route::get('/dbrequest/installed/{servicename}/monitoring', function ($servicename) {
+    return view('db.monitoring', ['servicename'=>$servicename]);
 });
 
 
@@ -31,7 +31,7 @@ Route::middleware(['auth', 'auth.dba'])->group(function () {
     Route::resource('/user', 'UserController');
 
     Route::get('/dbrequest/installed', 'DbrequestController@getInstalled');
-    Route::post('/dbrequest/installed/authdb', 'DbrequestController@authDb');
+    Route::get('/dbrequest/installed/authdb', 'DbrequestController@authDb');
     Route::post('/dbrequest/installed/modify-config', 'DbrequestController@modifyConfig');
 
     Route::get('/', 'DbrequestController@getInstalled');
