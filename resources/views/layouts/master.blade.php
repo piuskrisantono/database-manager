@@ -4,14 +4,13 @@
     <title>Database Manager</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
-
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <style type="text/css">
 
@@ -126,31 +125,30 @@ a:hover {
                 </div>
       </div>
 
-
-  <a href="/dbrequest/installed"  class="{{ (request()->is('/dbrequest/installed')) ? 'active' : '' }} {{ (request()->is('/')) ? 'active' : '' }}">
-      <i class="fa fa-database" style="{{ (request()->is('/dbrequest/installed')) ? 'color: white;font-weight: 600' : '' }}"></i>
-      <span style="{{ (request()->is('/dbrequest/installed')) ? 'color: white;font-weight: 600' : '' }}">Instances</span>
+  <a href="/dbrequest/installed"  class="{{ (Request::getRequestUri() == '/dbrequest/installed') ? 'active' : '' }} {{ (Request::getRequestUri() == '/') ? 'active' : '' }}">
+      <i class="fa fa-database" style="{{ (Request::getRequestUri() ==  '/dbrequest/installed') ? 'color: white;font-weight: 600' : '' }}"></i>
+      <span style="{{ (Request::getRequestUri() == '/dbrequest/installed') ? 'color: white;font-weight: 600' : '' }}">Instances</span>
   </a>
   <a id="no-hover">
-    <i class="fa fa-plus" style="{{ (request()->is('db/create')) ? 'color: white;font-weight: 600' : '' }}"></i>
-    <span style="{{ (request()->is('db/create')) ? 'color: white;font-weight: 600' : '' }}">Create</span>
+    <i class="fa fa-plus"></i>
+    <span>Create</span>
 
-  <a href="/dbrequest" class="{{ (request()->is('/dbrequest')) ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
-    <i class="fa fa-envelope" style="{{ (request()->is('/dbrequest')) ? 'color: white;font-weight: 600' : '' }}"></i>
-    <span style="{{ (request()->is('/dbrequest')) ? 'color: white;font-weight: 600' : '' }}">Request</span>
+  <a href="/dbrequest" class="{{ (Request::getRequestUri() =='/dbrequest') ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
+    <i class="fa fa-envelope" style="{{ (Request::getRequestUri() =='/dbrequest') ? 'color: white;font-weight: 600' : '' }}"></i>
+    <span style="{{ (Request::getRequestUri() =='/dbrequest') ? 'color: white;font-weight: 600' : '' }}">Request</span>
   </a>
 </a>
-<a href="/viewInstaller" class="{{ (request()->is('/viewInstaller')) ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
-  <i class="fa fa-play" style="{{ (request()->is('/viewInstaller')) ? 'color: white;font-weight: 600' : '' }}"></i>
-  <span style="{{ (request()->is('/viewInstaller')) ? 'color: white;font-weight: 600' : '' }}">Install</span>
+<a href="/viewInstaller" class="{{ (Request::getRequestUri() =='/viewInstaller') ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
+  <i class="fa fa-play" style="{{ (Request::getRequestUri() =='/viewInstaller') ? 'color: white;font-weight: 600' : '' }}"></i>
+  <span style="{{ (Request::getRequestUri() =='/viewInstaller') ? 'color: white;font-weight: 600' : '' }}">Install</span>
 </a>
-  <a href="/user" class="{{ (request()->is('/user')) ? 'active' : '' }}">
-    <i class="fa fa-user" style="{{ (request()->is('/user')) ? 'color: white;font-weight: 600' : '' }}"></i>
-    <span style="{{ (request()->is('/user')) ? 'color: white;font-weight: 600' : '' }}">Manage Users</span>
+  <a href="/user" class="{{ (Request::getRequestUri() =='/user') ? 'active' : '' }}">
+    <i class="fa fa-user" style="{{ (Request::getRequestUri() =='/user') ? 'color: white;font-weight: 600' : '' }}"></i>
+    <span style="{{ (Request::getRequestUri() =='/user') ? 'color: white;font-weight: 600' : '' }}">Manage Users</span>
   </a>
-  <a href="/history" class="{{ (request()->is('/history')) ? 'active' : '' }}">
-    <i class="fa fa-clock" style="{{ (request()->is('/history')) ? 'color: white;font-weight: 600' : '' }}"></i>
-    <span style="{{ (request()->is('/history')) ? 'color: white;font-weight: 600' : '' }}">History</span>
+  <a href="/history" class="{{ (Request::getRequestUri() =='/history') ? 'active' : '' }}">
+    <i class="fa fa-clock" style="{{ (Request::getRequestUri() =='/history') ? 'color: white;font-weight: 600' : '' }}"></i>
+    <span style="{{ (Request::getRequestUri() =='/history') ? 'color: white;font-weight: 600' : '' }}">History</span>
   </a>
   <a
   onclick="event.preventDefault();

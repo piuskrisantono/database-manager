@@ -438,4 +438,22 @@ class DbrequestController extends Controller
 	    return Redirect::back()->with('success', 'Successfully Changed Configuration');
         }
     }
+
+  public function monitor($servicename) {
+	$conn = pg_connect("host=localhost port=5432 dbname=monitoring_db user=piuskw77 password=piuskw77");
+	$stat = pg_query($conn, "select * from monitoring_table where servicename = '" . $servicename . "' order by time_collected desc limit 30 ");
+	return view('db.monitoring', ['stat' => $stat, 'servicename' => $servicename ]);
+  }
+
+ public function getData(Request $request){
+        $conn = pg_connect("host=localhost port=5432 dbname=monitoring_db user=piuskw77 password=piuskw77");
+        $stat = pg_query($conn, "select * from monitoring_table where servicename = '" . $request->servicename . "' order by time_collected desc limit 1");
+	$row = pg_fetch_row($stat);
+	$x = (object) [
+	    'cpu' => $row[1],
+	    'memory' => $row[2],
+	];
+ 
+	return json_encode($x);	
+ }
 }

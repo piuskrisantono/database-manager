@@ -26,6 +26,7 @@ class VerifyCsrfToken extends Middleware
         '/dbrequest*',
         '/cancelrequestready*',
         'dbrequest/installed',
-        '/history'
+        '/history',
+	'/getData'
     ];
 }
