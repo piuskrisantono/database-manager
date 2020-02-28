@@ -124,11 +124,13 @@ a:hover {
                 <h5 style="font-weight: 600">{{ Auth::user()->username }}</h5>
                 </div>
       </div>
-
+@if( Auth::user()->role_id == '1' )
   <a href="/dbrequest/installed"  class="{{ (Request::getRequestUri() == '/dbrequest/installed') ? 'active' : '' }} {{ (Request::getRequestUri() == '/') ? 'active' : '' }}">
       <i class="fa fa-database" style="{{ (Request::getRequestUri() ==  '/dbrequest/installed') ? 'color: white;font-weight: 600' : '' }}"></i>
       <span style="{{ (Request::getRequestUri() == '/dbrequest/installed') ? 'color: white;font-weight: 600' : '' }}">Instances</span>
   </a>
+@endif
+
   <a id="no-hover">
     <i class="fa fa-plus"></i>
     <span>Create</span>
@@ -138,6 +140,7 @@ a:hover {
     <span style="{{ (Request::getRequestUri() =='/dbrequest') ? 'color: white;font-weight: 600' : '' }}">Request</span>
   </a>
 </a>
+@if( Auth::user()->role_id == '1' )
 <a href="/viewInstaller" class="{{ (Request::getRequestUri() =='/viewInstaller') ? 'active' : '' }} dropdown-inside" style="padding-left:75px;">
   <i class="fa fa-play" style="{{ (Request::getRequestUri() =='/viewInstaller') ? 'color: white;font-weight: 600' : '' }}"></i>
   <span style="{{ (Request::getRequestUri() =='/viewInstaller') ? 'color: white;font-weight: 600' : '' }}">Install</span>
@@ -150,6 +153,7 @@ a:hover {
     <i class="fa fa-clock" style="{{ (Request::getRequestUri() =='/history') ? 'color: white;font-weight: 600' : '' }}"></i>
     <span style="{{ (Request::getRequestUri() =='/history') ? 'color: white;font-weight: 600' : '' }}">History</span>
   </a>
+@endif
   <a
   onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">

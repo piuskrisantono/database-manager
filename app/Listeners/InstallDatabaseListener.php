@@ -82,8 +82,37 @@ class InstallDatabaseListener implements ShouldQueue
 		exec("sudo -u ansible ansible-playbook -i /var/www/database-manager/storage/app/hosts /var/www/database-manager/storage/app/postgres/pgpool/playbook.yml --vault-password-file storage/app/.vault -e \"version=" . substr($event->engine, 11, 12)  . "\" >> postgres_pgpool.log");
 	}
 	else{
-		dd("Running Mongo");
-	}        
+	        $newcontent = "[all]\n";
+                foreach ($event->dbrequestservicename as $name) {
+                    $newcontent .= $name . "db-01.infra-wallet.lokal\n";
+                    $newcontent .= $name . "db-02.infra-wallet.lokal\n";
+	            $newcontent .= $name . "arb-01.infra-wallet.lokal\n";
+                }
+                $newcontent .= "\n[master]\n";
+                foreach ($event->dbrequestservicename as $name) {
+                    $newcontent .= $name . "db-01.infra-wallet.lokal\n";
+                }
+                $newcontent .= "\n[slave]\n";
+                foreach ($event->dbrequestservicename as $name) {
+                    $newcontent .= $name . "db-02.infra-wallet.lokal\n";
+                }
+                $newcontent .= "\n[arbiter]\n";
+                foreach ($event->dbrequestservicename as $name) {
+                    $newcontent .= $name . "arb-01.infra-wallet.lokal\n";
+                }
+
+
+                File::put('/var/www/database-manager/storage/app/mongo/hosts', $newcontent);
+                exec("sudo -u ansible  ansible-playbook -i /var/www/database-manager/storage/app/mongo/hosts /var/www/database-manager/storage/app/mongo/playbook.yml --vault-password-file storage/app/.vault --extra-vars \"version=" . substr($event->engine, 8, 10)  . "\" >> mongo.log");
+		
+		$newcontent = "[mongo]\n";
+                foreach ($event->dbrequestservicename as $name) {
+                    $newcontent .= $name . "db-02.infra-wallet.lokal\n";
+                }
+
+                File::put('/var/www/database-manager/storage/app/mongodb-consistent-backup/hosts', $newcontent);
+                exec("sudo -u ansible  ansible-playbook -i /var/www/database-manager/storage/app/mongodb-consistent-backup/hosts /var/www/database-manager/storage/app/mongodb-consistent-backup/install.yaml >> mongo-backup.log");
+		}        
 
         $dbrequest = Dbrequest::whereIn('servicename', $event->dbrequestservicename);
 

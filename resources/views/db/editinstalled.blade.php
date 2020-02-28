@@ -46,10 +46,10 @@
 
                     <div id="dbms-form" style="grid-column: 1/3; display: grid; grid-column-gap: 10px; grid-template-columns: auto 1fr 1fr 1fr 1fr; align-items:center; padding: 15px;">
                         <span>Database Management System</span>
-                        <label class="btn btn-outline-primary my-auto"><input id="postgres10" type="radio"> PostgreSQL 10</label>
-                        <label class="btn btn-outline-primary my-auto"><input id="postgres11" type="radio"> PostgreSQL 11</label>
-                        <label class="btn btn-outline-success my-auto"><input  id="mongo34" type="radio"> MongoDB 3.4</label>
-                        <label class="btn btn-outline-success my-auto"><input  id="mongo36" type="radio"> MongoDB 3.6</label>
+                        <label class="btn btn-outline-primary my-auto"><input id="postgres10" type="radio" name="engine"> PostgreSQL 10</label>
+                        <label class="btn btn-outline-primary my-auto"><input id="postgres11" type="radio" name="engine"> PostgreSQL 11</label>
+                        <label class="btn btn-outline-success my-auto"><input  id="mongo34" type="radio" name="engine"> MongoDB 3.4</label>
+                        <label class="btn btn-outline-success my-auto"><input  id="mongo36" type="radio" name="engine"> MongoDB 3.6</label>
                         <input id="request-type" type="text" name="version" value="" hidden>
                     </div>
 
@@ -67,7 +67,7 @@
                         <div>
                             <label for="service-name" >Virtual IP</label>
                                 <div class="input-group">
-                                <input type="text" class="form-control" id="service-name" name="requestedvip" value="{{$dbrequest->requestedvip}}">
+                                <input type="text" class="form-control" id="requestedvip" name="requestedvip" value="{{$dbrequest->requestedvip}}">
                             </div>
                         </div>
 
@@ -99,36 +99,28 @@
 
 window.onload = function(){
 
-
-        $('#request-postgres').click(function(){
-            $('#request-type').val('Postgres');
-        })
-        $('#request-mongo').click(function(){
-            $('#request-type').val('Mongo');
-        })
-
-
-
-
-        $('#service-name').on('input', function(){
-            $('#db-primary-name').text($('#service-name').val());
-            $('#db-secondary-name').text($('#service-name').val());
-            $('#pgbouncer-primary-name').text($('#service-name').val());
-            $('#pgbouncer-secondary-name').text($('#service-name').val());
-            $('#db-arbiter-name').text($('#service-name').val());
-        })
+$('#requestedvip').attr('disabled', false);
+$('#requestedvip').attr('required', true);
 
         $('#postgres10').click(function(){
             $('#request-type').val('PostgreSQL 10');
+		$('#requestedvip').attr('disabled', false);
+                $('#requestedvip').attr('required', true);
         })
         $('#postgres11').click(function(){
             $('#request-type').val('PostgreSQL 11');
+		$('#requestedvip').attr('disabled', false);
+                $('#requestedvip').attr('required', true);
         })
         $('#mongo34').click(function(){
             $('#request-type').val('MongoDB 3.4');
+		$('#requestedvip').attr('disabled', true);
+                $('#requestedvip').attr('required', false);
         })
         $('#mongo36').click(function(){
             $('#request-type').val('MongoDB 3.6');
+		$('#requestedvip').attr('disabled', true);
+                $('#requestedvip').attr('required', false);
         })
 
         if ("{{$dbrequest->engine}}" === "PostgreSQL 10") {

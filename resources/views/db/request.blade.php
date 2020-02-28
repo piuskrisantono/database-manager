@@ -181,9 +181,11 @@
         </div>
 
             <div class="my-auto">
+		@if(Auth::user()->role_id == '1')
                 <a class="btn btn-primary" href="/dbrequest/create" style="width: 150px;">
                     Create a Request
                 </a>
+		@endif
 
             </div>
 
@@ -258,9 +260,13 @@
                 <div class="request-card content-box shadow-sm" >
                     <div class="request-card-header">
                         <div class="profile d-flex flex-row">
-                                <div style="margin-right: 10px;height: 30px; width:30px; border-radius: 4vw;background-repeat: no-repeat; background-image: url({{ asset('img/avatar/'.$db->user->avatar.'.png') }}); background-position: center; background-size: 100%; border: 2px solid lightgrey; background-color:#ecf0f1;">
-                                </div>
-                                <div>{{$db->user->username}}
+                                
+				@if($db->user)
+                                            <td style="width: 50px"><div  style="height: 30px; width:30px; border-radius: 4vw;background-repeat: no-repeat; display: inline-block; background-image: url({{ asset('img/avatar/'.$db->user->avatar.'.png') }}); background-position: center; background-size: 100%; border: 2px solid lightgrey; background-color:#ecf0f1;"></div></td>
+                                        @else
+                                        <td style="width: 50px"><div  style="height: 30px; width:30px; border-radius: 4vw;background-repeat: no-repeat; display: inline-block; background-image: url({{ asset('img/avatar/5.png') }}); background-position: center; background-size: 100%; border: 2px solid lightgrey; background-color:#ecf0f1;"></div></td>
+                                        @endif
+				<div>{{$db->user->username}}
                                 </div>
                         </div>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 5px;">
@@ -403,7 +409,7 @@
                     </div>
                     <div class="request-card-footer" style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 15px;">
                         <div class="py-auto">
-                            @if($db->engine === 'Postgres')
+                            @if($db->engine === 'Postgres' && (Auth::user()->role_id == '1' || Auth::user()->role_id == '3'))
                                 <form action="/dbrequest/updatevip/{{$db->servicename}}" method="POST" \>
                                     @csrf
                             <div class="input-group" style="margin-top: 6.75px;">
@@ -423,7 +429,7 @@
                              </form>
                              @endif
                         </div>
-
+			@if(Auth::user()->role_id == '1' || Auth::user()->role_id == '2')
                         <form action="/dbrequest/updatevmstatus/{{$db->servicename}}" method="POST" style="display: grid; align-items: center">
                             <input type="hidden" name="_method" value="PUT" />
                             @csrf
@@ -439,6 +445,7 @@
                             </button>
                         @endif
                         </form>
+			@endif
                     </div>
 
                   </div>

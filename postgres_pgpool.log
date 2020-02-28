@@ -376,3 +376,1019 @@ postgrestestdb-02.infra-wallet.lokal : ok=13   changed=12   unreachable=0    fai
 postgrestestpgbouncer-01.infra-wallet.lokal : ok=30   changed=22   unreachable=0    failed=0    skipped=18   rescued=0    ignored=1   
 postgrestestpgbouncer-02.infra-wallet.lokal : ok=31   changed=23   unreachable=0    failed=0    skipped=17   rescued=0    ignored=1   
 
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing repository] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making pid directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Scripts for Failover] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755']) 
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) => {"ansible_loop_var": "item", "changed": false, "checksum": "9c23edb6d8117e04beafeadd01164bbd0701b8c1", "item": ["scripts/failover.sh.j2", "/etc/pgpool-II-11/failover.sh", "0755"], "msg": "Destination directory /etc/pgpool-II-11 does not exist"}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) => {"ansible_loop_var": "item", "changed": false, "checksum": "9c23edb6d8117e04beafeadd01164bbd0701b8c1", "item": ["scripts/failover.sh.j2", "/etc/pgpool-II-11/failover.sh", "0755"], "msg": "Destination directory /etc/pgpool-II-11 does not exist"}
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755'])
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755'])
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755'])
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding line to pcp.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating pool_passwd File] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Sending the pg_pool config file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Insertng pgpool User Password to pool_passw] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling pool_hba.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Hosts to pool_hba.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making the log directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Create the pgpool log file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Variable to rsyslog.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding syslog for pgpool.log] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Re-configure pgpool.conf on slave] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.3'"]) 
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing Repository] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11-extension] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating Extensions] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : postgresql_user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making Difference of postgresql.conf on Master - hot_standby] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Labelling master host] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Labelling secondary host] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding trigger_file & restore_command to recovery.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master')
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"')
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling sudo postgresql-11.service for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Configuring postgresql-11] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating Directory for Adding Failover Scripts] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=replscripts)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=replscripts)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=repltemplates)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=repltemplates)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Scripts to the Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Primary & Secondary Template postgresql.conf] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=primary)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=primary)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=secondary)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=secondary)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Editing the primary config file on the master] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Reloading postgresql] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Sharing ssh for All Hosts] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Port for pgpool] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Add user to pool_passwd] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling and Starting pgpool-II] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Commands to be executed] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) 
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating exporter directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Download pgpool exporter] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Unarchive exporter] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Changing ownership of exporter folder] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Place the service file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Starting pgpool exp] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Cleanup tar] *****
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+
+RUNNING HANDLER [/var/www/database-manager/storage/app/postgres/pgpool : restarting postgresql] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=18   changed=16   unreachable=0    failed=0    skipped=30   rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=13   changed=12   unreachable=0    failed=0    skipped=36   rescued=0    ignored=0   
+postgrestestpgbouncer-01.infra-wallet.lokal : ok=5    changed=0    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+postgrestestpgbouncer-02.infra-wallet.lokal : ok=5    changed=0    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing repository] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making pid directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Scripts for Failover] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755']) 
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755'])
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755'])
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755'])
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755'])
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755'])
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding line to pcp.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating pool_passwd File] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Sending the pg_pool config file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Insertng pgpool User Password to pool_passw] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling pool_hba.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Hosts to pool_hba.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making the log directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Create the pgpool log file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Variable to rsyslog.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding syslog for pgpool.log] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Re-configure pgpool.conf on slave] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.3'"]) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.5'"]) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.5'"]) 
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1'])
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.5'"])
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.5'"])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing Repository] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11-extension] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating Extensions] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : postgresql_user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making Difference of postgresql.conf on Master - hot_standby] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Labelling master host] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Labelling secondary host] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding trigger_file & restore_command to recovery.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master')
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"')
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling sudo postgresql-11.service for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Configuring postgresql-11] ***
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating Directory for Adding Failover Scripts] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=replscripts)
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=replscripts) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=repltemplates) 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=replscripts)
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=replscripts) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=repltemplates) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=repltemplates)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=repltemplates)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Scripts to the Directory] ***
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755']) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755']) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755']) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Primary & Secondary Template postgresql.conf] ***
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=primary) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=secondary) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=primary) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=secondary) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=primary)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=primary)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=secondary)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=secondary)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Editing the primary config file on the master] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Reloading postgresql] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Sharing ssh for All Hosts] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Port for pgpool] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Add user to pool_passwd] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling and Starting pgpool-II] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Commands to be executed] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) 
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_count", "/usr/sbin/pcp_node_count"], "delta": "0:00:00.021526", "end": "2020-02-25 22:30:59.790832", "item": "ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:30:59.769306", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_count", "/usr/sbin/pcp_node_count"], "delta": "0:00:00.021534", "end": "2020-02-25 22:30:59.968833", "item": "ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:30:59.947299", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_info", "/usr/sbin/pcp_node_info"], "delta": "0:00:00.020564", "end": "2020-02-25 22:31:00.124020", "item": "ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:00.103456", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_info", "/usr/sbin/pcp_node_info"], "delta": "0:00:00.024793", "end": "2020-02-25 22:31:00.301000", "item": "ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:00.276207", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_count", "/usr/sbin/pcp_proc_count"], "delta": "0:00:00.022809", "end": "2020-02-25 22:31:00.454161", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:00.431352", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_info", "/usr/sbin/pcp_proc_info"], "delta": "0:00:00.022693", "end": "2020-02-25 22:31:00.778347", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:00.755654", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_watchdog_info", "/usr/sbin/pcp_watchdog_info"], "delta": "0:00:00.022545", "end": "2020-02-25 22:31:01.102252", "item": "ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:01.079707", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists"], "stdout": "", "stdout_lines": []}
+...ignoring
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_count", "/usr/sbin/pcp_proc_count"], "delta": "0:00:01.021381", "end": "2020-02-25 22:31:01.615033", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:00.593652", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_info", "/usr/sbin/pcp_proc_info"], "delta": "0:00:00.021826", "end": "2020-02-25 22:31:01.965477", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:01.943651", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_watchdog_info", "/usr/sbin/pcp_watchdog_info"], "delta": "0:00:00.023992", "end": "2020-02-25 22:31:02.285293", "item": "ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 22:31:02.261301", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists"], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating exporter directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Download pgpool exporter] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Unarchive exporter] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Changing ownership of exporter folder] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Place the service file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Starting pgpool exp] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Cleanup tar] *****
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+RUNNING HANDLER [/var/www/database-manager/storage/app/postgres/pgpool : restarting postgresql] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=18   changed=16   unreachable=0    failed=0    skipped=30   rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=13   changed=12   unreachable=0    failed=0    skipped=36   rescued=0    ignored=0   
+postgrestestpgbouncer-01.infra-wallet.lokal : ok=30   changed=22   unreachable=0    failed=0    skipped=18   rescued=0    ignored=1   
+postgrestestpgbouncer-02.infra-wallet.lokal : ok=31   changed=23   unreachable=0    failed=0    skipped=17   rescued=0    ignored=1   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing repository] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11 and some other tools] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making pid directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Scripts for Failover] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755']) 
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755'])
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/failover.sh.j2', u'/etc/pgpool-II-11/failover.sh', u'0755'])
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755'])
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/ip_w.j2', u'/usr/sbin/ip_w', u'0755'])
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755'])
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/arping_w.j2', u'/usr/sbin/arping_w', u'0755'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding line to pcp.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating pool_passwd File] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Sending the pg_pool config file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Insertng pgpool User Password to pool_passw] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling pool_hba.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Hosts to pool_hba.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making the log directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Create the pgpool log file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Variable to rsyslog.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding syslog for pgpool.log] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Re-configure pgpool.conf on slave] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.3'"]) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.3'"]) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1']) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.5'"]) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.5'"]) 
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'wd_priority = (.)*', u'wd_priority = 1'])
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'other_pgpool_hostname0 = (.)*', u"other_pgpool_hostname0 = '172.22.127.5'"])
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'heartbeat_destination0 = (.)*', u"heartbeat_destination0 = '172.22.127.5'"])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing Repository] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+ok: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Installing pgpool-II-11-extension] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating Extensions] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : postgresql_user] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making Difference of postgresql.conf on Master - hot_standby] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Reloading postgresql] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Labelling master host] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Labelling secondary host] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding trigger_file & restore_command to recovery.conf] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master')
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=trigger_file = '/db/11/data/im_the_master') 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"') 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=restore_command = 'cp /archive_log/pg_wals/%f "%p"')
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling sudo postgresql-11.service for postgres] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Configuring postgresql-11] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating Directory for Adding Failover Scripts] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=replscripts)
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=replscripts) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=repltemplates) 
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=replscripts)
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=replscripts) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=repltemplates) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=repltemplates)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=repltemplates)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Scripts to the Directory] ***
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755']) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755']) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755']) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755']) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/promote.sh.j2', u'/db/11/data/replscripts/promote.sh', u'0755'])
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755'])
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=[u'scripts/replscripts/disable_postgresql.sh.j2', u'/db/11/data/replscripts/disable_postgresql.sh', u'0755'])
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Primary & Secondary Template postgresql.conf] ***
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=primary) 
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=secondary) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=primary) 
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=secondary) 
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=primary)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=primary)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=secondary)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=secondary)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Editing the primary config file on the master] ***
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Reloading postgresql] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+skipping: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Making .ssh Directory] ***
+changed: [postgrestestdb-01.infra-wallet.lokal]
+changed: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Sharing ssh for All Hosts] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=id_rsa)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=id_rsa.pub)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=authorized_keys)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=config)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=config)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=config)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Adding Port for pgpool] ***
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9999/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9898/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9694/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --add-port=9000/tcp --permanent)
+changed: [postgrestestdb-01.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestdb-02.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal] => (item=firewall-cmd --reload)
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal] => (item=firewall-cmd --reload)
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Writing .pgpass File for pg_basebackup] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Add user to pool_passwd] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Enabling and Starting pgpool-II] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Commands to be executed] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) 
+skipping: [postgrestestdb-01.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) 
+skipping: [postgrestestdb-02.infra-wallet.lokal] => (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) 
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_count", "/usr/sbin/pcp_node_count"], "delta": "0:00:00.023046", "end": "2020-02-25 23:20:43.797371", "item": "ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:43.774325", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_count", "/usr/sbin/pcp_node_count"], "delta": "0:00:00.023942", "end": "2020-02-25 23:20:43.976275", "item": "ln -s /etc/alternatives/pgpool-pcp_node_count /usr/sbin/pcp_node_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:43.952333", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_info", "/usr/sbin/pcp_node_info"], "delta": "0:00:00.024024", "end": "2020-02-25 23:20:44.132394", "item": "ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:44.108370", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_node_info", "/usr/sbin/pcp_node_info"], "delta": "0:00:00.023266", "end": "2020-02-25 23:20:44.297806", "item": "ln -s /etc/alternatives/pgpool-pcp_node_info /usr/sbin/pcp_node_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:44.274540", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_node_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_count", "/usr/sbin/pcp_proc_count"], "delta": "0:00:00.021220", "end": "2020-02-25 23:20:44.619868", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:44.598648", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_count", "/usr/sbin/pcp_proc_count"], "delta": "0:00:01.022161", "end": "2020-02-25 23:20:45.453354", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_count /usr/sbin/pcp_proc_count", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:44.431193", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_count’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_info", "/usr/sbin/pcp_proc_info"], "delta": "0:00:00.020719", "end": "2020-02-25 23:20:45.767975", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:45.747256", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_proc_info", "/usr/sbin/pcp_proc_info"], "delta": "0:00:01.022608", "end": "2020-02-25 23:20:45.938328", "item": "ln -s /etc/alternatives/pgpool-pcp_proc_info /usr/sbin/pcp_proc_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:44.915720", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_proc_info’: File exists"], "stdout": "", "stdout_lines": []}
+failed: [postgrestestpgbouncer-01.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_watchdog_info", "/usr/sbin/pcp_watchdog_info"], "delta": "0:00:00.021741", "end": "2020-02-25 23:20:46.092939", "item": "ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:46.071198", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists"], "stdout": "", "stdout_lines": []}
+...ignoring
+failed: [postgrestestpgbouncer-02.infra-wallet.lokal] (item=ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info) => {"ansible_loop_var": "item", "changed": true, "cmd": ["ln", "-s", "/etc/alternatives/pgpool-pcp_watchdog_info", "/usr/sbin/pcp_watchdog_info"], "delta": "0:00:00.023487", "end": "2020-02-25 23:20:46.255129", "item": "ln -s /etc/alternatives/pgpool-pcp_watchdog_info /usr/sbin/pcp_watchdog_info", "msg": "non-zero return code", "rc": 1, "start": "2020-02-25 23:20:46.231642", "stderr": "ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists", "stderr_lines": ["ln: failed to create symbolic link ‘/usr/sbin/pcp_watchdog_info’: File exists"], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Creating exporter directory] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Download pgpool exporter] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Unarchive exporter] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Changing ownership of exporter folder] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Place the service file] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-01.infra-wallet.lokal]
+ok: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Starting pgpool exp] ***
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/postgres/pgpool : Cleanup tar] *****
+skipping: [postgrestestdb-01.infra-wallet.lokal]
+skipping: [postgrestestdb-02.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-01.infra-wallet.lokal]
+changed: [postgrestestpgbouncer-02.infra-wallet.lokal]
+
+RUNNING HANDLER [/var/www/database-manager/storage/app/postgres/pgpool : restarting postgresql] ***
+changed: [postgrestestdb-02.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+postgrestestdb-01.infra-wallet.lokal : ok=18   changed=16   unreachable=0    failed=0    skipped=30   rescued=0    ignored=0   
+postgrestestdb-02.infra-wallet.lokal : ok=13   changed=12   unreachable=0    failed=0    skipped=36   rescued=0    ignored=0   
+postgrestestpgbouncer-01.infra-wallet.lokal : ok=30   changed=22   unreachable=0    failed=0    skipped=18   rescued=0    ignored=1   
+postgrestestpgbouncer-02.infra-wallet.lokal : ok=31   changed=23   unreachable=0    failed=0    skipped=17   rescued=0    ignored=1   
+

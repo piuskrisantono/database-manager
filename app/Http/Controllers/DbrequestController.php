@@ -62,20 +62,16 @@ class DbrequestController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        //
         $db = new Dbrequest();
 
         $requestedDisk = "";
-        // for ($count = 0; $count < sizeof($request->requestedDiskName); $count++) {
-        //     $requestedDisk .= $request->requestedDiskName[$count] . ", " . $request->requestedDiskSize[$count] . ", ";
-        // }
 
         for ($count = 0; $count < sizeof($request->requestedDiskSize); $count++) {
             $requestedDisk .=  $request->requestedDiskSize[$count] . ", ";
         }
         $requestedDisk = substr($requestedDisk, 0, strlen($requestedDisk) - 2);
         $db->servicename = $request->servicename;
-        $db->requestedby = Auth::user()->id;
+        $db->requestedby = Auth::user()->username;
         $db->engine = $request->requestType;
         $db->requestedcpu = $request->requestCpu;
         $db->requestedmemory = $request->requestMemory;
@@ -131,12 +127,13 @@ class DbrequestController extends Controller
 
         $db = Dbrequest::find($servicename);
         $before = $db;
-        $description = "";
+        $description = "Changed ";
 
-        if ($before->servicename != $request->servicename)  $description = $description .  " service name from " . $before->servicename . " to " . $request->serviceName . ", ";
+        if ($before->servicename != $request->servicename) $description = $description .  " service name from " . $before->servicename . " to " . $request->servicename . ", ";
         if ($before->engine != $request->requestType)  $description = $description . " DBMS from " . $before->engine . " to " . $request->requestType . ", ";
         if ($before->requestedcpu != $request->requestCpu)  $description = $description . " requested CPU from " . $before->requestedcpu . " to " . $request->requestCpu . ", ";
         if ($before->requestedmemory != $request->requestMemory)  $description = $description . " requested memory from " . $before->requestedmemory . " to " . $request->requestMemory . ", ";
+	$description = 	substr($description, 0, strlen($description) - 2);
 
         $requestedDisk = "";
         for ($count = 0; $count < sizeof($request->requestedDiskSize); $count++) {
@@ -150,26 +147,13 @@ class DbrequestController extends Controller
         $db->requestedmemory = $request->requestMemory;
         $db->requesteddisk = $requestedDisk;
         $db->vmstatus = false;
-        $db->requestedvip = "";
+        $db->requestedvip = $before->requestedvip;
         $db->installed = "";
         $db->save();
 
 
 
-        // $differences = array_diff($after, $before);
-        // array_pop($differences);
-
-        // $diff = implode(", ", $differences);
-
-        // dd($diff);
-
-
-
-
-
-
         HistoryController::store(Auth::user()->username, "edited request for", $servicename, $description);
-
 
 
         return redirect('/dbrequest')->with('success', 'Successfully Updated Request');
@@ -188,7 +172,7 @@ class DbrequestController extends Controller
 
         $db->delete();
 
-        HistoryController::store(Auth::user()->username, "deleted request for", $servicename, "");
+        HistoryController::store(Auth::user()->username, "deleted", $servicename, "");
 
         return Redirect::back()->with('success', 'Successfully Deleted');
     }
@@ -211,9 +195,9 @@ class DbrequestController extends Controller
 
         $dbrequest->requestedvip = $request->requestedvip;
 
-        $dbrequest->save();
+        HistoryController::store(Auth::user()->username, "updated VIP for request ", $dbrequest->servicename, "Becomes " . $request->requestedvip);
 
-        HistoryController::store(Auth::user()->username, "updated VIP for request", $servicename, "become " . $request->requestedvip);
+	$dbrequest->save();
 
         return redirect('/dbrequest')->with('success', 'Successfully Store VIP');
     }
@@ -222,11 +206,16 @@ class DbrequestController extends Controller
     {
         $dbrequest = Dbrequest::find($servicename);
 
-        $dbrequest->vmstatus ? $dbrequest->vmstatus = false  : $dbrequest->vmstatus = true;
+        if($dbrequest->vmstatus){
+		$dbrequest->vmstatus = false;
+		HistoryController::store(Auth::user()->username, "updated VM Status for request ", $dbrequest->servicename, "Becomes not ready");
+	}else {
+		$dbrequest->vmstatus = true;
+		HistoryController::store(Auth::user()->username, "updated VM Status for request ", $dbrequest->servicename, "Becomes ready" );
+	}
 
         $dbrequest->save();
 
-        HistoryController::store(Auth::user()->username, "updated VM Status for request", $servicename, "becomes " . $dbrequest->vmstatus);
 
         return redirect('/dbrequest')->with('success', 'Successfully Updated VM Status');
     }
@@ -239,7 +228,7 @@ class DbrequestController extends Controller
 
         $dbrequest->save();
 
-        HistoryController::store(Auth::user()->username, "canceled ready request", $servicename, "");
+        HistoryController::store(Auth::user()->username, "canceled ready request ", $servicename, "");
 
 
         return redirect('/dbrequest')->with('success', 'Successfully Canceled VM');
@@ -314,31 +303,46 @@ class DbrequestController extends Controller
         $messages = [
             'servicename.regex' => 'Service name must only contain lower case alphabet, number, and \'-\' (dash)',
         ];
-
+	
+	if($request->version == 'PostgreSQL 10' || $request->version == 'PostgreSQL 11'){
         $validator = Validator::make($request->all(), [
             'servicename' => array('regex:/^[0-9-a-z]/', 'unique:dbrequests'),
             'requestedvip' => 'ipv4'
         ], $messages);
-
+	}
+	else {
+        $validator = Validator::make($request->all(), [
+            'servicename' => array('regex:/^[0-9-a-z]/', 'unique:dbrequests')
+        ], $messages);
+	}
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
                 ->withInput();
         }
-        //
+
+
         $db = new Dbrequest();
         $db->servicename = $request->servicename;
-        $db->requestedby = Auth::user()->id;
+        $db->requestedby = Auth::user()->username;
         $db->engine = $request->version;
         $db->requestedcpu = 999;
         $db->requestedmemory = 999;
         $db->requesteddisk = "";
         $db->vmstatus = true;
+	if($request->version == 'PostgreSQL 10' || $request->version == 'PostgreSQL 11'){
         $db->requestedvip = $request->requestedvip;
+	} else {
+		$db->requestedvip = "";
+	}
         $db->installed = "Installed";
         $db->save();
-
-        HistoryController::store(Auth::user()->username, "added installed database named", $request->servicename, "with DBMS " . $request->requestType . " and virtual IP " . $request->requestedvip);
+	if($request->version == 'PostgreSQL 10' || $request->version == 'PostgreSQL 11'){
+	        HistoryController::store(Auth::user()->username, "added installed database named", $request->servicename, "with DBMS " . $request->version . " and virtual IP " . $request->requestedvip);
+	}
+	else {
+		HistoryController::store(Auth::user()->username, "added installed database named", $request->servicename, "with DBMS " . $request->version);
+	}
         return redirect('/')->with('success', 'DB Successfully Added');
     }
 
@@ -356,13 +360,19 @@ class DbrequestController extends Controller
 
         $messages = [
             'servicename.regex' => 'Service name must only contain lower case alphabet, number, and \'-\' (dash)',
-            'requestedvip' => 'ipv4'
         ];
 
+        if($request->version == 'PostgreSQL 10' || $request->version == 'PostgreSQL 11'){
         $validator = Validator::make($request->all(), [
-            'servicename' => array('regex:/^[0-9-a-z]/')
+            'servicename' => 'regex:/^[0-9-a-z]/',
+            'requestedvip' => 'ipv4'
         ], $messages);
-
+        }
+        else {
+        $validator = Validator::make($request->all(), [
+            'servicename' => 'regex:/^[0-9-a-z]/'
+        ], $messages);
+        }
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
@@ -375,17 +385,30 @@ class DbrequestController extends Controller
         if ($db->servicename != $request->servicename) {
             $description = "Servicename from " . $db->servicename . " to " . $request->servicename;
             $db->servicename = $request->servicename;
+		if ($db->engine != $request->version || $request->requestedvip) $description = $description . ", ";
         }
+	
         if ($db->engine != $request->version) {
-            $description = $description . ", DB engine from " . $db->engine . " to " . $request->version;
+            $description = $description . "DB engine from " . $db->engine . " to " . $request->version;
             $db->engine = $request->version;
+		if($request->version == 'PostgreSQL 10' || $request->version == 'PostgreSQL 11'){
+			if ($db->requestedvip != $request->requestedvip) {
+				$description = $description . ", ";
+			}
+		}
+			
         }
+	if($request->version == 'PostgreSQL 10' || $request->version == 'PostgreSQL 11'){
         if ($db->requestedvip != $request->requestedvip) {
-            $description = $description . ", virtual IP from " . $db->requestedvip . " to " . $request->requestedvip;
+            $description = $description . "virtual IP from " . $db->requestedvip . " to " . $request->requestedvip;
             $db->requestedvip = $request->requestedvip;
         }
+	}
+        else {
+                $db->requestedvip = "";
+        }
 
-        $db->requestedby = Auth::user()->id;
+        $db->requestedby = Auth::user()->username;
         $db->requestedcpu = 999;
         $db->requestedmemory = 999;
         $db->requesteddisk = "";
@@ -401,11 +424,13 @@ class DbrequestController extends Controller
 
 
     public function authDb(Request $request)
-    {
-        $conn = pg_connect("host=" . $request->hostname . "db-01.infra-wallet.lokal port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
+    {	try{
+        	$conn = pg_connect("host=" . $request->hostname . "db-01.infra-wallet.lokal port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
 
-        $config = pg_query($conn, "select  name, setting, unit, short_desc, extra_desc, context, pending_restart from pg_settings where context != 'internal' and context !='backend' order by category;");
-
+	        $config = pg_query($conn, "select  name, setting, unit, short_desc, extra_desc, context, pending_restart from pg_settings where context != 'internal' and context !='backend' order by category;");
+	} catch (\Exception $e){
+		return Redirect::back()->with('error', $e->getMessage());
+	}
 
         return view('db.viewconfig', ['config' => $config, 'dbcredentials' => $request]);
     }
@@ -419,12 +444,15 @@ class DbrequestController extends Controller
 
         for ($i = 0; $i < sizeof($request->changedconfigvalue); $i++) {
             $conn = pg_connect("host=" . $request->hostname . "db-01.infra-wallet.lokal port=5432 dbname=postgres user=" . $request->username . " password=" . $request->password);
+		try {
             pg_query($conn, "ALTER SYSTEM SET " . $request->changedconfigname[$i] . "='" . $request->changedconfigvalue[$i] . "'");
-
-            $changed_configuration .= $changed_configuration .  $request->changedconfigname[$i] . " become " .  $request->changedconfigvalue[$i] . ",";
+		} catch (\Exception $e){
+			return Redirect::back()->with('error', $e->getMessage());
+		}
+            $changed_configuration = $changed_configuration .  $request->changedconfigname[$i] . " become " .  $request->changedconfigvalue[$i] . ", ";
         }
 
-        $changed_configuration = substr($changed_configuration, 0, strlen($changed_configuration) - 2);
+        $changed_configuration = substr($changed_configuration, 0, strlen($changed_configuration) - 1);
 
         HistoryController::store(Auth::user()->username, "changed database configuration for service", $request->hostname, $changed_configuration);
 

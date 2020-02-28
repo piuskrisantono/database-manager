@@ -295,24 +295,55 @@
                                       <td>{{$db->requestedvip}}</td>
                                   <td style="font-weight: bold;color: {{($db->installed == 'Installed') ?  '#2ecc71' : '#3498db' }};">{{$db->installed}}</td>
                                       <td>
-                                        <a type="button" class="btn btn-outline-primary" href="/updateInstalled/{{$db->servicename}}"  data-toggle="popover" data-content="Edit">
+                                        <a type="button" class="btn btn-outline-primary
+						@if($db->installed != 'Installed')
+							disabled
+						@endif
+						" href="/updateInstalled/{{$db->servicename}}"  data-toggle="popover" data-content="Edit">
                                              <i class="fa fa-edit"></i>
                                         </a>
-                                        <div style="display:inline-block" data-toggle="popover" data-content="Configure">
-                                            <button type="button" onclick="popupLogin('{{$db->servicename}}', '{{$db->engine}}')" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#modallogin" >
+                                        @if($db->engine == 'PostgreSQL 10' || $db->engine == 'PostgreSQL 11')
+                                        <div style="display:inline-block" 
+						@if($db->installed == 'Installed')
+							data-toggle="popover"
+							data-content="Configure"
+						@endif
+						>
+                                            <button type="button" onclick="popupLogin('{{$db->servicename}}', '{{$db->engine}}')" class="btn btn btn-outline-primary
+                                                @if($db->installed != 'Installed')
+                                                        disabled
+                                                @endif
+						"
+						@if($db->installed == 'Installed')
+							data-toggle="modal" data-target="#modallogin" 
+						@endif
+						>
                                                 <i class="fa fa-cog "></i>
                                             </button>
                                         </div>
+					@endif
 
 
-                                        <a type="button" class="btn btn-outline-primary" href="/dbrequest/installed/{{$db->servicename}}/monitoring" data-toggle="popover" data-content="Monitor">
+                                        <a type="button" class="btn btn-outline-primary
+                                                @if($db->installed != 'Installed')
+                                                        disabled
+                                                @endif						
+						" href="/dbrequest/installed/{{$db->servicename}}/monitoring" data-toggle="popover" data-content="Monitor">
                                             <i class="fa fa-signal"></i>
                                        </a>
 
 
 
                                        <div style="display:inline-block" data-toggle="popover" data-content="Delete">
-                                            <button type="submit" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalDelete" onclick="changePopUp('{{$db->servicename}}')" data-toggle="popover" data-content="Delete">
+                                            <button type="submit" class="btn btn-outline-danger
+                                                @if($db->installed != 'Installed')
+                                                        disabled
+                                                @endif
+						" 
+						@if($db->installed == 'Installed')
+							data-toggle="modal" data-target="#modalDelete"
+						@endif
+						 onclick="changePopUp('{{$db->servicename}}')" data-toggle="popover" data-content="Delete">
                                                     <i class="fa fa-trash"></i>
                                             </button>
                                        </div>

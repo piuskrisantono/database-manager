@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function dbrequests()
     {
-        return $this->hasMany('App\Dbrequest');
+        return $this->hasMany('App\Dbrequest', 'username', 'requestedby');
     }
 
     public function histories()

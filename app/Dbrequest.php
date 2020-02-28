@@ -15,6 +15,6 @@ class Dbrequest extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'requestedby');
+        return $this->belongsTo('App\User', 'requestedby', 'username');
     }
 }

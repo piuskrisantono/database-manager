@@ -3,11 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Database Manager</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,6 +25,7 @@
 </head>
 <body>
 <div class="container">
+@include('layouts.messages')
     <div class="row justify-content-center" style="align-items: center; height: 100vh;">
         <div class="col-md-6">
             <div class="card shadow-sm">
@@ -93,6 +98,24 @@
             </div>
         </div>
     </div>
+@if(count($errors) > 0)
+        <div class="alert alert-danger">
+            {{$errors->first()}}
+        </div>
+@endif
+
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{session('success')}}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{session('error')}}
+    </div>
+@endif
 </div>
 </body>
 </html>

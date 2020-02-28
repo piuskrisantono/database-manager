@@ -1,0 +1,518 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : include_vars] **************
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding Repository File] ****
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Installing MongoDB] ********
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Firewalld] ********
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding MongoDB Port] *******
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=--reload)
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=--reload)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending conf file with appropriate properties] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Creating data, log, and script directory] ***
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700']) 
+ok: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+ok: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755'])
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644'])
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700'])
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Sharing mongodb-keyfile] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing SELinux and Owner for mongo directories] ***
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /data) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs) 
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chown -R mongod:mongod /data)
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs)
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs)
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /data)
+changed: [mongotestdb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs)
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Mongo to create user] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending script to add user] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding user] ***************
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing config on replication] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Restarting Mongo with replication settings] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Creating data, log, and script directory] ***
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755']) 
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755']) 
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644']) 
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing SELinux for mongo directories] ***
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/) 
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb) 
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb)
+
+TASK [/var/www/database-manager/storage/app/mongo : Sharing mongodb-keyfile] ***
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600']) 
+skipping: [mongotestdb-01.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400']) 
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600'])
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Mongo with Configuration File] ***
+skipping: [mongotestdb-01.infra-wallet.lokal]
+skipping: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending script to add replica member] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding Node to Replica Set] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+fatal: [mongotestdb-01.infra-wallet.lokal]: FAILED! => {"changed": true, "cmd": ["mongo", "-u", "admin", "-p", "Pr0ductionDb", "--authenticationDatabase", "admin", "--eval", "load('/root/command_to_load.js');"], "delta": "0:00:00.155174", "end": "2020-02-24 10:12:03.812615", "msg": "non-zero return code", "rc": 252, "start": "2020-02-24 10:12:03.657441", "stderr": "", "stderr_lines": [], "stdout": "MongoDB shell version v3.6.17\nconnecting to: mongodb://127.0.0.1:27017/?authSource=admin&gssapiServiceName=mongodb\nImplicit session: session { \"id\" : UUID(\"009c3404-5e83-4269-9128-81d5d1c67b55\") }\nMongoDB server version: 3.6.17\n2020-02-24T10:12:03.808+0700 E QUERY    [thread1] [/root/command_to_load.js:8:1] TypeError: cfg.members[2] is undefined\nStack trace:\n@/root/command_to_load.js:8:1\n@(shell eval):1:1\n----------\n2020-02-24T10:12:03.809+0700 E QUERY    [thread1] Error: error loading js file: /root/command_to_load.js @(shell eval):1:1", "stdout_lines": ["MongoDB shell version v3.6.17", "connecting to: mongodb://127.0.0.1:27017/?authSource=admin&gssapiServiceName=mongodb", "Implicit session: session { \"id\" : UUID(\"009c3404-5e83-4269-9128-81d5d1c67b55\") }", "MongoDB server version: 3.6.17", "2020-02-24T10:12:03.808+0700 E QUERY    [thread1] [/root/command_to_load.js:8:1] TypeError: cfg.members[2] is undefined", "Stack trace:", "@/root/command_to_load.js:8:1", "@(shell eval):1:1", "----------", "2020-02-24T10:12:03.809+0700 E QUERY    [thread1] Error: error loading js file: /root/command_to_load.js @(shell eval):1:1"]}
+
+TASK [/var/www/database-manager/storage/app/mongo : Replicate the log archive script for logrotate and log archiving] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Replicate the log archive script for logrotate and log archiving] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding the script to the crontab of mongod] ***
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Create exporter dir if it doesn't exists] ***
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Download exporter file] ****
+changed: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Unarchive exporter] ********
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Place the service file] ****
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing ownership of exporter folder] ***
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting mongodb_exporter] ***
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Cleanup tars] **************
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+RUNNING HANDLER [/var/www/database-manager/storage/app/mongo : Start MongoDBb] ***
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+mongotestarb-01.infra-wallet.lokal : ok=20   changed=10   unreachable=0    failed=0    skipped=12   rescued=0    ignored=0   
+mongotestdb-01.infra-wallet.lokal : ok=16   changed=10   unreachable=0    failed=1    skipped=4    rescued=0    ignored=0   
+mongotestdb-02.infra-wallet.lokal : ok=22   changed=14   unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : include_vars] **************
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding Repository File] ****
+ok: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestdb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Installing MongoDB] ********
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+fatal: [mongotestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "msg": "Failure talking to yum: failure: repodata/repomd.xml from mongodb-org-: [Errno 256] No more mirrors to try.\nhttps://repo.mongodb.org/yum/redhat/7/mongodb-org//x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found"}
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Firewalld] ********
+ok: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding MongoDB Port] *******
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=--reload)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending conf file with appropriate properties] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Creating data, log, and script directory] ***
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700']) 
+ok: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Sharing mongodb-keyfile] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing SELinux and Owner for mongo directories] ***
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /data) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs) 
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chown -R mongod:mongod /data)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs)
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Mongo to create user] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending script to add user] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding user] ***************
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing config on replication] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Restarting Mongo with replication settings] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Creating data, log, and script directory] ***
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644']) 
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing SELinux for mongo directories] ***
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb) 
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb)
+
+TASK [/var/www/database-manager/storage/app/mongo : Sharing mongodb-keyfile] ***
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400']) 
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600'])
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Mongo with Configuration File] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending script to add replica member] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding Node to Replica Set] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Replicate the log archive script for logrotate and log archiving] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Replicate the log archive script for logrotate and log archiving] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding the script to the crontab of mongod] ***
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Create exporter dir if it doesn't exists] ***
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Download exporter file] ****
+changed: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Unarchive exporter] ********
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Place the service file] ****
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing ownership of exporter folder] ***
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting mongodb_exporter] ***
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Cleanup tars] **************
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+RUNNING HANDLER [/var/www/database-manager/storage/app/mongo : Start MongoDBb] ***
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+mongotestarb-01.infra-wallet.lokal : ok=20   changed=9    unreachable=0    failed=0    skipped=12   rescued=0    ignored=0   
+mongotestdb-01.infra-wallet.lokal : ok=3    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+mongotestdb-02.infra-wallet.lokal : ok=22   changed=13   unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : include_vars] **************
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding Repository File] ****
+ok: [mongotestdb-01.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Installing MongoDB] ********
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+fatal: [mongotestdb-01.infra-wallet.lokal]: FAILED! => {"changed": false, "msg": "Failure talking to yum: failure: repodata/repomd.xml from mongodb-org-: [Errno 256] No more mirrors to try.\nhttps://repo.mongodb.org/yum/redhat/7/mongodb-org//x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found"}
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Firewalld] ********
+ok: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding MongoDB Port] *******
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=--permanent --add-port=27017/tcp)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=--reload)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=--reload)
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending conf file with appropriate properties] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Creating data, log, and script directory] ***
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644']) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700']) 
+ok: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/logs', u'directory', u'0755'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/logs/mongod.log', u'touch', u'0644'])
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/data', u'directory', u'0700'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Sharing mongodb-keyfile] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing SELinux and Owner for mongo directories] ***
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /data) 
+skipping: [mongotestarb-01.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs) 
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /data)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /logs)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chown -R mongod:mongod /data)
+changed: [mongotestdb-02.infra-wallet.lokal] => (item=chown -R mongod:mongod /logs)
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Mongo to create user] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending script to add user] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding user] ***************
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing config on replication] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Restarting Mongo with replication settings] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Creating data, log, and script directory] ***
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644']) 
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/scripts', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/archive', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/lib/mongo', u'directory', u'0755'])
+ok: [mongotestarb-01.infra-wallet.lokal] => (item=[u'/var/log/mongodb/mongod.log', u'file', u'0644'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing SELinux for mongo directories] ***
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb) 
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_var_lib_t /var/lib/mongo/)
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=chcon -Rv -u system_u -t mongod_log_t /var/log/mongodb)
+
+TASK [/var/www/database-manager/storage/app/mongo : Sharing mongodb-keyfile] ***
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600']) 
+skipping: [mongotestdb-02.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400']) 
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=[u'mongod-arbiter.conf', u'/etc/mongod.conf', u'0600'])
+changed: [mongotestarb-01.infra-wallet.lokal] => (item=[u'mongodb-keyfile', u'/var/lib/mongo/mongodb-keyfile', u'0400'])
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting Mongo with Configuration File] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Sending script to add replica member] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding Node to Replica Set] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+skipping: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Replicate the log archive script for logrotate and log archiving] ***
+skipping: [mongotestarb-01.infra-wallet.lokal]
+ok: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Replicate the log archive script for logrotate and log archiving] ***
+skipping: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Adding the script to the crontab of mongod] ***
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Create exporter dir if it doesn't exists] ***
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Download exporter file] ****
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Unarchive exporter] ********
+changed: [mongotestarb-01.infra-wallet.lokal]
+changed: [mongotestdb-02.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Place the service file] ****
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Changing ownership of exporter folder] ***
+ok: [mongotestdb-02.infra-wallet.lokal]
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Starting mongodb_exporter] ***
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+TASK [/var/www/database-manager/storage/app/mongo : Cleanup tars] **************
+changed: [mongotestdb-02.infra-wallet.lokal]
+changed: [mongotestarb-01.infra-wallet.lokal]
+
+RUNNING HANDLER [/var/www/database-manager/storage/app/mongo : Start MongoDBb] ***
+ok: [mongotestarb-01.infra-wallet.lokal]
+
+PLAY RECAP *********************************************************************
+mongotestarb-01.infra-wallet.lokal : ok=20   changed=9    unreachable=0    failed=0    skipped=12   rescued=0    ignored=0   
+mongotestdb-01.infra-wallet.lokal : ok=3    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+mongotestdb-02.infra-wallet.lokal : ok=22   changed=13   unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+

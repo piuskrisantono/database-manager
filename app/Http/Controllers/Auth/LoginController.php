@@ -66,15 +66,18 @@ class LoginController extends Controller
         $username = $credentials[$this->username()];
         $password = $credentials['password'];
 
-        $user = \App\User::where($this->username(), $username)->first();
-        $this->guard()->login($user, true);
-        return true;
 
         $user_format = env('LDAP_USER_FORMAT', 'cn=%s,' . env('LDAP_BASE_DN', ''));
         $userdn = sprintf($user_format, $username);
         // you might need this, as reported in
         // [#14](https://github.com/jotaelesalinas/laravel-simple-ldap-auth/issues/14):
         // Adldap::auth()->bind($userdn, $password);
+
+	try {
+		Adldap::auth()->attempt($userdn, $password, $bindAsUser = true);
+	} catch (\Exception $e) {
+		 return Redirect::back()->with('error', 'Email or password is wrong.');
+	}
 
         if (Adldap::auth()->attempt($userdn, $password, $bindAsUser = true)) {
             // the user exists in the LDAP server, with the provided password
@@ -99,17 +102,20 @@ class LoginController extends Controller
                 //     $user->$field = $value !== null ? $value : '';
                 // }
             } else {
-                return Redirect::back()->with('error', 'You don\'t have permission to use this application, please contact DBA team if you think you should have it.');
+                return redirect('/login')->with('error', 'You dont have permission to use this application, please contact DBA team if you think you should have it.');
             }
 
             // by logging the user we create the session, so there is no need to login again (in the configured time).
             // pass false as second parameter if you want to force the session to expire when the user closes the browser.
             // have a look at the section 'session lifetime' in `config/session.php` for more options.
         }
+	else {
+		return Redirect::back()->with('error', 'Email or password is wrong.');
+	}
 
         // the user doesn't exist in the LDAP server or the password is wrong
         // log error
-        return Redirect::back()->with('error', 'Email or password is wrong.');
+       # return Redirect::back()->with('error', 'Email or password is wrong.');
     }
 
     // protected function retrieveSyncAttributes($username)
